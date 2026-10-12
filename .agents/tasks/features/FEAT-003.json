@@ -2,7 +2,7 @@
   "id": "FEAT-003",
   "type": "feat",
   "description": "Admin Dashboard UI — 6 pages with Enterprise Information System design. Depends on FEAT-001 (design tokens, deps) and FEAT-002 (API routes exist). Independent of FEAT-004 (public page). Read UI_DESIGN_INTELLIGENCE.md at /Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/UI_DESIGN_INTELLIGENCE.md before writing any UI code.",
-  "status": "pending",
+  "status": "completed",
   "steps": [
     "Read /Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/UI_DESIGN_INTELLIGENCE.md and /Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/DESIGN_SYSTEM.md before writing any component. The design direction is already decided: Enterprise Information System, deep navy #1e3a5f, white backgrounds, Inter font stack, no glassmorphism, no gradients, no decorative blobs, no fake charts.",
     "Implement Tailwind design tokens. In tailwind.config.ts extend theme with colors: brand:'#1e3a5f', brandHover:'#2d5a8e', accent:'#2563eb', bgPage:'#f8f9fa', surface:'#ffffff', textPrimary:'#111827', textSecondary:'#6b7280', border:'#e5e7eb', success:'#15803d', successBg:'#dcfce7', warning:'#b45309', warningBg:'#fef9c3', danger:'#dc2626', dangerBg:'#fee2e2', info:'#1d4ed8', infoBg:'#dbeafe'. In src/app/globals.css add @import url for Inter from Google Fonts (https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap) and set font-family:Inter,ui-sans-serif,system-ui on body. Set base font-size 14px for data density.",
@@ -41,5 +41,5 @@
     "npm run lint"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "1. Next.js 16 enforces `export const instant = false` on all admin pages that use DB queries or auth() — added to all 4 admin pages and sign-in page. 2. `new Date()` in server components triggers prerender error in Next.js 16; fixed by using `connection()` from next/server in DashboardStats.tsx. 3. React Compiler ESLint rule flags `ref` as special — renamed IssuanceActions prop from `ref` to `issuanceRef`. 4. React Compiler flags synchronous setState in useEffect early-return path — restructured IssuanceForm to use async function. 5. `fileRef.current` accessed during render flagged — replaced with `hasFile` state flag in LogoUpload. 6. Pre-existing `@typescript-eslint/no-explicit-any` in signature-block-generator.ts needed per-line eslint-disable (file-level disable was removed by earlier tooling update). All three verification commands pass: npm run build ✓, npm run typecheck ✓, npm run lint ✓ (0 errors, 37 warnings all in pre-existing FEAT-002 lib files). Files created: 10 UI components, 6 admin pages with server/client split, 4 new API routes (org detail, org units CRUD, org signers). Anti-AI-Slop assessment: Product specificity 5/5 (all copy references QR issuances, orgs, signers), Functional completeness 4/5 (all controls wired to real API), Accessibility 4/5 (proper labels, focus states, dialog focus trap, ARIA), no fake data, no decorative blobs or gradients. Score: 44/50."
 }
