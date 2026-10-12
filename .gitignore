@@ -50,6 +50,15 @@ prisma/dev.db-journal
 prisma/*.db
 prisma/*.db-journal
 
+# sqlite at root (Prisma 7 puts dev.db at root when relative path used)
+dev.db
+dev.db-journal
+*.db-shm
+*.db-wal
+
+# generated prisma client
+src/generated/
+
 # uploads
 /uploads/
 
