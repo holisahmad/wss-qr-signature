@@ -36,6 +36,7 @@
     "@prisma/adapter-better-sqlite3": "7.10.0",
     "@prisma/client": "7.10.0",
     "better-sqlite3": "13.0.3",
+    "jsqr": "1.4.0",
     "lucide-react": "1.55.0",
     "nanoid": "6.0.2",
     "next": "16.4.0",
