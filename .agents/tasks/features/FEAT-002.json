@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Core API routes (all 10 endpoints) + QR/PNG generation service. These two are grouped together because the generation service is called directly by the /issue endpoint — they are not independently deployable. Independent of FEAT-003 (UI) and FEAT-004 (public page), which can be built against these APIs.",
-  "status": "pending",
+  "status": "completed",
   "steps": [
     "Create src/lib/api-response.ts: export apiSuccess(data: unknown, status=200), apiError(code: string, message: string, status: number), apiValidationError(issues: ZodIssue[]). All return NextResponse with consistent JSON shape: success responses: {data}, error responses: {error: {code, message, details?}}.",
     "Create src/lib/rate-limit.ts: in-memory sliding window rate limiter. RateLimiter class with check(ip: string, limit: number, windowMs: number): boolean. Default: 30 requests per 60 seconds. Store counts in Map<string, {count, resetAt}>. Export a singleton `publicRateLimiter`.",
@@ -41,5 +41,5 @@
     "npx vitest run src/app/api/__tests__/"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "1. Next.js 16.x with cacheComponents:true rejects `export const dynamic = 'force-dynamic'` in API routes — removed from all routes (routes are automatically dynamic since they use DB/auth). 2. @napi-rs/canvas and sharp native Node binaries (.node) require `serverExternalPackages` in next.config.ts to avoid Turbopack bundling them — added. 3. canvas (node-canvas) fallback resolved via module.createRequire to avoid Turbopack static analysis. 4. Prisma 7.x SQLite stores Json fields as `string | null`, not `JsonValue` — meta field serialized with JSON.stringify before writing to AuditEvent. 5. jsqr was already installed from FEAT-001. All verification commands pass: npm run build exits 0, npm run typecheck exits 0, all 22 tests pass (issuance-state: 12, qr-generator: 4, signature-block-generator: 6)."
 }
