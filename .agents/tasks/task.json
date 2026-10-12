@@ -1,0 +1,7 @@
+{
+  "task_id": "task-wss-qr-signature",
+  "task_description": "Build WSS QR Signature — a production-minded QR document issuance and public verification system. Next.js 15 App Router + TypeScript strict + Prisma SQLite + NextAuth.js v5 + Tailwind CSS. Admin dashboard for issuing documents, QR + PNG signature block generation, public verification page, searchable archive. Enterprise Information System design (navy palette, no decorative AI-slop). Full Vitest test suite.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004", "FEAT-005"],
+  "blocked_reason": null
+}

@@ -1,0 +1,23 @@
+{
+  "project_type": "Next.js 15 App Router + TypeScript strict — greenfield, scaffolded from scratch",
+  "language": "TypeScript (strict mode, no `any`)",
+  "build_system": "npm + Next.js 15 (turbopack for dev, webpack for build). No workspace. Single package.json at repo root.",
+  "test_framework": "Vitest with jsdom environment + @testing-library/react. Config in vitest.config.ts. Setup file at src/test/setup.ts. Commands: `npx vitest run` (all), `npx vitest run <path>` (single file).",
+  "build_command": "npm run build",
+  "test_command": "npm run test (which runs: npx vitest run)",
+  "verification_instructions": "1. npm run build — must exit 0 (no TypeScript or webpack errors). 2. npm run typecheck — must exit 0 (tsc --noEmit). 3. npm run lint — must exit 0. 4. npm run test — report actual pass/fail. 5. npx prisma migrate dev — applies migrations. 6. npx prisma db seed — seeds test data.",
+  "snapshot_or_generated_files": "prisma/dev.db (SQLite dev database, git-ignored). prisma/migrations/* (checked in). uploads/ directory (runtime, git-ignored). .next/ (build output, git-ignored).",
+  "environment_constraints": "Node 24.x (v24.20.0 on this machine). npm 11.x. Required env vars: NEXTAUTH_SECRET, DATABASE_URL=file:./dev.db, NEXTAUTH_URL=http://localhost:3000, BASE_URL=http://localhost:3000, UPLOAD_DIR=/absolute/path/to/uploads. Never hardcode secrets. .env is git-ignored; .env.example is checked in.",
+  "contribution_requirements": "Follow UI_DESIGN_INTELLIGENCE.md — no fake data, no broken controls, Anti-AI-Slop score >= 42/50. Design direction: Enterprise Information System — deep navy #1e3a5f, white backgrounds, Inter font, no glassmorphism/gradients/blobs. Audit log append-only (no UPDATE/DELETE on AuditEvent). Public verification endpoint never exposes adminNotes, createdById, or internal IDs.",
+  "key_patterns": "App Router: all routes in src/app/. Shared components in src/components/ui/ and src/components/layout/. Business logic in src/lib/ (qr-generator.ts, signature-block-generator.ts, db.ts, auth-utils.ts, audit.ts, rate-limit.ts, issuance-state-machine.ts). Zod schemas in src/lib/schemas/. API routes follow pattern: src/app/api/<resource>/route.ts. Auth: src/auth.ts (NextAuth v5 config). Middleware: src/middleware.ts (protects /admin/*). Tests: src/lib/__tests__/*.test.ts and src/app/api/__tests__/*.test.ts.",
+  "relevant_files": [
+    "/Users/macbookpro/www/wss-qr-signature/roadmaps-wss-qr-signature.md",
+    "/Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/UI_DESIGN_INTELLIGENCE.md",
+    "/Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/DESIGN_SYSTEM.md",
+    "/Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/DESIGN_DECISIONS.md",
+    "/Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/UI_FEATURE_PROMPT.md",
+    "/Users/macbookpro/Downloads/UI_Design_Intelligence_Pack/AGENTS.md",
+    "/Users/macbookpro/www/wss-qr-signature/.agents/tasks/plan.md"
+  ],
+  "directory_structure": "Root: package.json, tsconfig.json, tailwind.config.ts, next.config.ts, .env.example, README.md, prisma/, docs/, src/. src/: app/ (Next.js routes), components/ (ui/ + layout/), lib/ (business logic + utilities), types/ (type extensions), test/ (setup). docs/: PRD.md, ARCHITECTURE.md, DATABASE_SCHEMA.md, API_SPEC.md, DESIGN_SYSTEM.md, SECURITY.md, IMPLEMENTATION_PLAN.md, DESIGN_DECISIONS.md."
+}

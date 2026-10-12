@@ -1,0 +1,71 @@
+{
+  "name": "wss-qr-signature",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "allowScripts": {
+    "sharp": true,
+    "@napi-rs/canvas": true,
+    "prisma": true,
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "esbuild": true,
+    "next": true,
+    "bcryptjs": true,
+    "ts-node": true,
+    "lightningcss": true,
+    "@tailwindcss/oxide": true,
+    "unrs-resolver": true,
+    "better-sqlite3": true,
+    "fsevents": true
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "2.11.3",
+    "@napi-rs/canvas": "1.0.11",
+    "@prisma/adapter-better-sqlite3": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "better-sqlite3": "13.0.3",
+    "lucide-react": "1.55.0",
+    "nanoid": "6.0.2",
+    "next": "16.4.0",
+    "next-auth": "5.0.0-beta.32",
+    "prisma": "7.10.0",
+    "qrcode": "1.5.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sharp": "0.35.5",
+    "zod": "4.6.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/better-sqlite3": "9.6.0",
+    "@types/node": "^20",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^3.2.4",
+    "bcryptjs": "^3.0.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "jsdom": "^26.1.0",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsx": "4.23.15",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}

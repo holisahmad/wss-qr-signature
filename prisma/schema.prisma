@@ -1,0 +1,156 @@
+// WSS QR Signature — Prisma Schema
+// Provider: SQLite (dev) / PostgreSQL (prod) — all types are compatible
+// Timestamps: UTC via @default(now()) / @updatedAt
+// Public IDs: nanoid(21) stored in `ref` fields — never expose DB `id` publicly
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  ADMIN
+}
+
+enum DocumentStatus {
+  DRAFT
+  ISSUED
+  REVOKED
+  EXPIRED
+}
+
+enum AssetType {
+  QR_PNG
+  SIGNATURE_BLOCK
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         UserRole  @default(ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  issuances    DocumentIssuance[]
+  statusChanges IssuanceStatusHistory[]
+  auditEvents  AuditEvent[]
+}
+
+model Organization {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  logoPath  String?
+  address   String?
+  website   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  units     OrganizationalUnit[]
+  signers   Signer[]
+  issuances DocumentIssuance[]
+}
+
+model OrganizationalUnit {
+  id        String    @id @default(cuid())
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  name      String
+  code      String?
+  createdAt DateTime  @default(now())
+
+  issuances DocumentIssuance[]
+}
+
+model Signer {
+  id         String    @id @default(cuid())
+  orgId      String
+  org        Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  fullName   String
+  title      String
+  employeeId String?
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  issuances  DocumentIssuance[]
+}
+
+model DocumentIssuance {
+  id                 String    @id @default(cuid())
+  ref                String    @unique  // nanoid(21) — used in public verification URLs
+  orgId              String
+  org                Organization @relation(fields: [orgId], references: [id])
+  unitId             String?
+  unit               OrganizationalUnit? @relation(fields: [unitId], references: [id])
+  signerId           String
+  signer             Signer    @relation(fields: [signerId], references: [id])
+  title              String
+  docNumber          String
+  docType            String
+  description        String?
+  docDate            DateTime
+  issuanceTimestamp  DateTime
+  expiresAt          DateTime?
+  status             DocumentStatus @default(DRAFT)
+  adminNotes         String?   // NEVER exposed publicly
+  createdById        String
+  createdBy          User      @relation(fields: [createdById], references: [id])
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  assets             GeneratedAsset[]
+  statusHistory      IssuanceStatusHistory[]
+  auditEvents        AuditEvent[]
+}
+
+model GeneratedAsset {
+  id          String    @id @default(cuid())
+  issuanceId  String
+  issuance    DocumentIssuance @relation(fields: [issuanceId], references: [id], onDelete: Cascade)
+  type        AssetType
+  filePath    String
+  fileSize    Int
+  mimeType    String
+  createdAt   DateTime  @default(now())
+}
+
+model IssuanceStatusHistory {
+  id          String    @id @default(cuid())
+  issuanceId  String
+  issuance    DocumentIssuance @relation(fields: [issuanceId], references: [id], onDelete: Cascade)
+  fromStatus  DocumentStatus
+  toStatus    DocumentStatus
+  reason      String?
+  actorId     String?
+  actor       User?     @relation(fields: [actorId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+
+model AuditEvent {
+  id          String    @id @default(cuid())
+  actorId     String?
+  actor       User?     @relation(fields: [actorId], references: [id])
+  issuanceId  String?
+  issuance    DocumentIssuance? @relation(fields: [issuanceId], references: [id])
+  action      String
+  entityType  String
+  entityId    String
+  meta        String?   // JSON stored as String for SQLite compatibility
+  ipAddress   String?   // NEVER returned in public API responses
+  createdAt   DateTime  @default(now())
+
+  @@index([entityType, entityId])
+  @@index([actorId])
+  @@index([createdAt])
+}

@@ -1,0 +1,45 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Core API routes (all 10 endpoints) + QR/PNG generation service. These two are grouped together because the generation service is called directly by the /issue endpoint — they are not independently deployable. Independent of FEAT-003 (UI) and FEAT-004 (public page), which can be built against these APIs.",
+  "status": "pending",
+  "steps": [
+    "Create src/lib/api-response.ts: export apiSuccess(data: unknown, status=200), apiError(code: string, message: string, status: number), apiValidationError(issues: ZodIssue[]). All return NextResponse with consistent JSON shape: success responses: {data}, error responses: {error: {code, message, details?}}.",
+    "Create src/lib/rate-limit.ts: in-memory sliding window rate limiter. RateLimiter class with check(ip: string, limit: number, windowMs: number): boolean. Default: 30 requests per 60 seconds. Store counts in Map<string, {count, resetAt}>. Export a singleton `publicRateLimiter`.",
+    "Create src/lib/audit.ts: export async writeAuditEvent({action, entityType, entityId, actorId?, meta?, ip?}): Promise<void>. Uses prisma from src/lib/db.ts. Catches all errors internally (never throws — audit failure must not break business logic). AuditEvent has no update/delete methods exposed.",
+    "Create src/lib/issuance-state-machine.ts: export function canTransition(from: DocumentStatus, to: DocumentStatus): boolean. Valid transitions: DRAFT→ISSUED, ISSUED→REVOKED, ISSUED→EXPIRED. All others return false. Export function assertTransition(from, to): void — throws Error if not allowed.",
+    "Create src/lib/schemas/issuance.ts: Zod schemas — CreateIssuanceSchema (all required fields from roadmap §2 Step 2), UpdateIssuanceSchema (partial, only for DRAFT), RevokeIssuanceSchema ({reason: z.string().min(10)}).",
+    "Implement POST /api/issuances in src/app/api/issuances/route.ts: authenticate (requireAdmin), validate body with CreateIssuanceSchema, check for duplicate docNumber+orgId (return 409 if exists), generate ref with nanoid(21), create DocumentIssuance with status=DRAFT, write AuditEvent ISSUANCE_CREATED, return 201 with new record.",
+    "Implement GET /api/issuances in same file: authenticate (requireAdmin), parse query params (page, limit max 100, search, status, orgId, unitId, dateFrom, dateTo, sort), build Prisma where clause, return {data, total, page, limit}.",
+    "Create src/app/api/issuances/[id]/route.ts: GET handler (requireAdmin) returns full issuance with org, unit, signer, assets, statusHistory. PATCH handler (requireAdmin) updates DRAFT-only fields using UpdateIssuanceSchema, writes AuditEvent ISSUANCE_UPDATED.",
+    "Implement src/lib/qr-generator.ts: async generateQR(verificationUrl: string, logoPath?: string | null): Promise<Buffer>. Step 1: generate 800×800px QR PNG buffer using `qrcode` with errorCorrectionLevel:'H', width:800. Step 2: if logoPath exists, use `sharp` to load logo, resize to 160×160, extend with 8px white background (total 176×176), composite centered onto QR buffer. Step 3: attempt to decode result — import a lightweight QR decoder (use `jsqr` package which is free and MIT: install it with --save-exact). If decoded URL !== verificationUrl, fall back to no-logo version. Step 4: return final PNG buffer.",
+    "Install jsqr for QR decode validation: `npm install --save-exact jsqr`. This is used only server-side in qr-generator.ts.",
+    "Implement src/lib/signature-block-generator.ts: async generateSignatureBlock(issuance: IssuanceWithRelations, qrBuffer: Buffer, opts?:{width?:number,height?:number,background?:'white'|'transparent'}): Promise<Buffer>. Use @napi-rs/canvas. Canvas default 800×200. Layout: left column 0-180px: org logo (if exists, resize to 160×160, centered vertically); center column 188-348px: QR (resize qrBuffer to 160×160); right column 356-780px: metadata text. Text content: org name (bold 14px, #1e3a5f), doc title (12px, truncate>60chars, #111827), doc number (11px monospace, #374151), signer (10px, '{fullName} — {title}', #374151), date (10px, ISO date, #6b7280), ref (9px, #9ca3af). Background: white (#ffffff) or transparent. Return PNG buffer. Define type IssuanceWithRelations in src/types/issuance.ts.",
+    "Create src/app/api/issuances/[id]/issue/route.ts: POST handler (requireAdmin). 1. Fetch issuance, assert status===DRAFT (else 409). 2. Call generateQR(verificationUrl, org.logoPath). 3. Call generateSignatureBlock(issuance, qrBuffer). 4. Ensure UPLOAD_DIR/assets/ exists (fs.mkdirSync recursive). 5. Write both PNG files with UUID-based filenames. 6. Use prisma.$transaction to: create 2 GeneratedAsset rows, create IssuanceStatusHistory (DRAFT→ISSUED), update DocumentIssuance status=ISSUED. 7. Write AuditEvent ISSUANCE_ISSUED. 8. Return 200 with updated issuance + asset URLs.",
+    "Create src/app/api/issuances/[id]/revoke/route.ts: POST handler (requireAdmin). Validate RevokeIssuanceSchema. Assert canTransition(ISSUED, REVOKED). Transaction: create IssuanceStatusHistory, update status=REVOKED. Write AuditEvent ISSUANCE_REVOKED. Return 200.",
+    "Create src/app/api/verify/[ref]/route.ts: GET handler — NO auth required. Apply publicRateLimiter check (IP from x-forwarded-for or request.ip). Look up by ref field. Return only public-safe fields: {ref, status, organization:{name, logoPath}, organizationalUnit:{name}, signer:{fullName, title}, document:{title, docNumber, docType, docDate, issuanceTimestamp, expiresAt}}. Do NOT include: adminNotes, createdById, User emails, internal numeric IDs. Return 404 for unknown ref with no detail. Return 429 for rate-limited requests.",
+    "Create src/app/api/organizations/route.ts: POST (requireAdmin, create org with Zod validation), GET (requireAdmin, list all orgs).",
+    "Create src/app/api/organizations/[id]/logo/route.ts: POST handler (requireAdmin). Parse multipart form data using request.formData(). Validate: content-type must be image/png, image/jpeg, or image/svg+xml (check file.type). Size <= 2MB (check file.size). Use sharp to resize to max 300×300 preserving aspect ratio. Save to UPLOAD_DIR/logos/{nanoid(16)}.{ext}. Update Organization.logoPath. Write AuditEvent LOGO_UPLOADED. Return 200 with new logoPath.",
+    "Create src/app/api/issuances/[id]/assets/[assetId]/route.ts: GET handler (requireAdmin). Fetch GeneratedAsset from DB (verify issuanceId matches). Read file from filePath with fs.readFile. Return response with Content-Type and Content-Disposition: attachment; filename='signature-block.png'."
+  ],
+  "acceptance_criteria": [
+    "npm run typecheck exits 0",
+    "npm run build exits 0",
+    "POST /api/issuances with valid payload returns 201 with a ref field of length >= 21",
+    "POST /api/issuances/[id]/issue creates two GeneratedAsset rows and transitions status to ISSUED",
+    "GET /api/verify/[ref] returns 200 for a valid ISSUED ref; response does NOT contain adminNotes or createdById",
+    "GET /api/verify/[ref] returns 404 for an unknown ref",
+    "POST /api/issuances with no session returns 401",
+    "generateQR() returns a buffer that decodes to the input URL"
+  ],
+  "verification": [
+    "npm run build",
+    "npm run typecheck",
+    "npx vitest run src/lib/__tests__/qr-generator.test.ts",
+    "npx vitest run src/lib/__tests__/signature-block-generator.test.ts",
+    "npx vitest run src/lib/__tests__/issuance-state.test.ts",
+    "npx vitest run src/app/api/__tests__/"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
