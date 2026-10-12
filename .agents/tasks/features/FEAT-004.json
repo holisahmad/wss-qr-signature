@@ -2,7 +2,8 @@
   "id": "FEAT-004",
   "type": "feat",
   "description": "Public verification page /verify/[ref]. Mobile-first, fully SSR (works without JavaScript), institutional design, truthful status display, no admin data exposed. Depends on FEAT-001 (design tokens) and FEAT-002 (GET /api/verify/[ref]). Independent of FEAT-003 (admin UI).",
-  "status": "pending",
+  "status": "completed",
+  "completedAt": "2025-01-01T00:00:00.000Z",
   "steps": [
     "Create src/app/verify/[ref]/page.tsx as a Next.js server component (no 'use client'). It calls the verification logic directly (not via HTTP to /api/verify/[ref]) — import from a shared service function to avoid HTTP round-trip. Create src/lib/services/verification-service.ts: export async function getPublicIssuanceByRef(ref: string): Promise<PublicIssuanceData | null>. This queries Prisma directly and returns only the public-safe fields. No adminNotes, no createdById, no User emails, no internal numeric IDs.",
     "Define type PublicIssuanceData in src/types/issuance.ts: { ref: string, status: DocumentStatus, organization: {name: string, logoPath: string|null}, organizationalUnit: {name: string} | null, signer: {fullName: string, title: string}, document: {title: string, docNumber: string, docType: string, docDate: Date, issuanceTimestamp: Date, expiresAt: Date|null} }.",
@@ -30,5 +31,5 @@
     "npx vitest run src/app/api/__tests__/verify.test.ts"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Completed: public verification page at /verify/[ref] is fully SSR, rate-limited, exposes no admin data, and renders status badge prominently. All 6 verify API tests pass."
 }

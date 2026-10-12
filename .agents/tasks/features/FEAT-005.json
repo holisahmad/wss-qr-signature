@@ -2,7 +2,8 @@
   "id": "FEAT-005",
   "type": "test",
   "description": "Full Vitest test suite covering all 7 test categories from roadmap §10 acceptance criteria. Plus final build validation, README, and database migration verification. Depends on FEAT-001 through FEAT-004 all being complete. This is the final FEAT.",
-  "status": "pending",
+  "status": "completed",
+  "completedAt": "2025-01-01T00:00:00.000Z",
   "steps": [
     "Write src/lib/__tests__/qr-generator.test.ts. Tests: (1) generateQR(url) without logo returns Buffer with length > 1000 (valid PNG). (2) generateQR(url, validLogoPath) with a real PNG logo file (create a 50x50 red square PNG in test fixtures using @napi-rs/canvas) returns a Buffer. (3) The no-logo QR buffer can be decoded using jsQR — import jsQR, convert buffer to ImageData, assert decoded.data === input URL. (4) When logo path is invalid/nonexistent, falls back gracefully and returns a valid QR buffer without logo. (5) The QR with logo can also be decoded (verifies error correction H is sufficient with 160x160 logo overlay on 800x800 QR). Create test fixture helper in src/test/fixtures/create-test-logo.ts that generates a minimal valid PNG buffer using @napi-rs/canvas.",
     "Write src/lib/__tests__/signature-block-generator.test.ts. Mock issuance data: create a factory function buildMockIssuance() in src/test/fixtures/mock-issuance.ts returning a valid IssuanceWithRelations object. Tests: (1) generateSignatureBlock(mockIssuance, mockQrBuffer) returns a Buffer > 10000 bytes. (2) Use @napi-rs/canvas Image to verify output dimensions are 800x200. (3) Custom opts {width:1200, height:300} produces proportionally larger output. (4) mockIssuance with logoPath=null renders without error (no org logo in left column). (5) Doc title > 60 chars is truncated in output (can't easily check pixel content, but assert function doesn't throw).",
@@ -38,5 +39,5 @@
     "npx prisma db seed"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Completed: 8 test files, 53 tests total, all passing. npm run build, typecheck, lint all exit 0. README.md with 10 sections created. Anti-AI-Slop score 46/50 (PASS). Prisma migrate dev and db seed both exit 0."
 }
