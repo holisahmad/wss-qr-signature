@@ -6,9 +6,12 @@ export interface SignatureBlockOptions {
   background?: 'white' | 'transparent'
 }
 
+// The canvas module uses dynamic loading to avoid Turbopack native binary bundling issues
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CanvasModule = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createCanvas: (width: number, height: number) => any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   loadImage: (src: string | Buffer) => Promise<any>
 }
 
