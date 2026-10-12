@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "chore",
   "description": "Project scaffolding, dependency installation, documentation suite, Prisma schema + migrations, NextAuth.js v5 auth, and database seed. This is the foundation all other FEATs depend on.",
-  "status": "pending",
+  "status": "completed",
   "steps": [
     "Run `npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias '@/*'` inside /Users/macbookpro/www/wss-qr-signature. When prompted: use App Router = yes. This scaffolds package.json, tsconfig.json (strict true already set by CNA), tailwind.config.ts, next.config.ts, src/app/layout.tsx, src/app/page.tsx, src/app/globals.css.",
     "Install all runtime deps with exact versions: `npm install --save-exact prisma @prisma/client next-auth@beta @auth/prisma-adapter qrcode @napi-rs/canvas nanoid zod lucide-react sharp`. Install dev deps: `npm install --save-exact -D @types/qrcode vitest @vitest/coverage-v8 @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom`.",
@@ -34,5 +34,5 @@
     "npx prisma db seed"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Prisma 7.x breaking changes vs FEAT-001 spec (written for Prisma 5.x): (1) PrismaClient now requires a driver adapter — installed @prisma/adapter-better-sqlite3 for SQLite dev. (2) Generated client outputs to src/generated/prisma/ (excluded from git; npx prisma generate required after clone). (3) Seed config moved from package.json to prisma7.config.ts migrations.seed. (4) Next.js 16.x renamed middleware.ts to proxy.ts — file exported as async function proxy(). (5) nanoid v6 API unchanged. (6) nextauth v5 beta: no PrismaAdapter needed for JWT strategy — credentials provider + JWT callbacks handle user lookup directly. All verification commands pass: npm run build, npm run typecheck, npx prisma validate, npx prisma db seed all exit 0."
 }
