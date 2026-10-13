@@ -1,21 +1,11 @@
 import { Suspense } from 'react'
-import { redirect } from 'next/navigation'
-import { auth } from '@/auth'
 import { SignInForm } from './SignInForm'
 
 export const metadata = {
   title: 'Sign In — WSS QR Signature',
 }
 
-export const instant = false
-
-export default async function SignInPage() {
-  // If already authenticated, redirect to admin
-  const session = await auth()
-  if (session?.user?.id) {
-    redirect('/admin')
-  }
-
+export default function SignInPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-4">
       <div className="w-full max-w-sm">
