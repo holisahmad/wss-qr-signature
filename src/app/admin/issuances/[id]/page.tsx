@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 function FieldRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-0.5 py-2 border-b border-[--color-border] last:border-0">
-      <dt className="text-[12px] font-medium text-[--color-text-secondary] uppercase tracking-wide">
+    <div className="flex flex-col gap-0.5 py-2 border-b border-[#e5e7eb] last:border-0">
+      <dt className="text-[12px] font-medium text-[#6b7280] uppercase tracking-wide">
         {label}
       </dt>
-      <dd className="text-[14px] text-[--color-text-primary]">{value ?? '—'}</dd>
+      <dd className="text-[14px] text-[#111827]">{value ?? '—'}</dd>
     </div>
   )
 }
@@ -146,15 +146,15 @@ export default async function IssuanceDetailPage({
                   <li key={h.id} className="flex items-start gap-2 text-[13px]">
                     <div className="flex items-center gap-1 shrink-0">
                       <Badge status={h.fromStatus as DocumentStatus} />
-                      <span className="text-[--color-muted]">→</span>
+                      <span className="text-[#9ca3af]">→</span>
                       <Badge status={h.toStatus as DocumentStatus} />
                     </div>
                     <div className="flex flex-col">
-                      <time className="text-[12px] text-[--color-text-secondary]" dateTime={h.createdAt.toISOString()}>
+                      <time className="text-[12px] text-[#6b7280]" dateTime={h.createdAt.toISOString()}>
                         {fmtDateTime(h.createdAt)}
                       </time>
                       {h.reason && (
-                        <span className="text-[12px] text-[--color-text-secondary]">
+                        <span className="text-[12px] text-[#6b7280]">
                           Reason: {h.reason}
                         </span>
                       )}
@@ -175,7 +175,7 @@ export default async function IssuanceDetailPage({
                 <img
                   src={`/api/issuances/${issuance.id}/assets/${signatureBlockAsset.id}`}
                   alt={`Signature block for ${issuance.title}`}
-                  className="w-full h-auto border border-[--color-border] rounded"
+                  className="w-full h-auto border border-[#e5e7eb] rounded"
                   loading="lazy"
                 />
                 {qrAsset && (
@@ -183,7 +183,7 @@ export default async function IssuanceDetailPage({
                     <img
                       src={`/api/issuances/${issuance.id}/assets/${qrAsset.id}`}
                       alt={`QR code for ${issuance.title}`}
-                      className="w-32 h-32 border border-[--color-border] rounded"
+                      className="w-32 h-32 border border-[#e5e7eb] rounded"
                       loading="lazy"
                     />
                   </div>
@@ -194,10 +194,10 @@ export default async function IssuanceDetailPage({
           {/* Admin notes (internal) */}
           {issuance.adminNotes && (
             <Card title="Internal Notes">
-              <p className="text-[13px] text-[--color-text-secondary] whitespace-pre-wrap">
+              <p className="text-[13px] text-[#6b7280] whitespace-pre-wrap">
                 {issuance.adminNotes}
               </p>
-              <p className="mt-2 text-[11px] text-[--color-muted]">
+              <p className="mt-2 text-[11px] text-[#9ca3af]">
                 Not visible on the public verification page.
               </p>
             </Card>
@@ -209,7 +209,7 @@ export default async function IssuanceDetailPage({
               fallback={
                 <div className="space-y-2 animate-pulse">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-4 bg-[--color-muted-bg] rounded" />
+                    <div key={i} className="h-4 bg-[#f3f4f6] rounded" />
                   ))}
                 </div>
               }

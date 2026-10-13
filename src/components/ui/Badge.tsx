@@ -12,21 +12,21 @@ const statusConfig: Record<
   ISSUED: {
     label: '✓ Issued',
     className:
-      'bg-[--color-success-bg] text-[--color-success] border border-[--color-success]',
+      'bg-[#dcfce7] text-[#15803d] border border-[#15803d]',
   },
   REVOKED: {
     label: '✗ Revoked',
     className:
-      'bg-[--color-danger-bg] text-[--color-danger] border border-[--color-danger]',
+      'bg-[#fee2e2] text-[#dc2626] border border-[#dc2626]',
   },
   EXPIRED: {
     label: '⚠ Expired',
     className:
-      'bg-[--color-warning-bg] text-[--color-warning] border border-[--color-warning]',
+      'bg-[#fef3c7] text-[#b45309] border border-[#b45309]',
   },
   DRAFT: {
     label: '○ Draft',
-    className: 'bg-[--color-muted-bg] text-[--color-text-secondary] border border-[--color-border]',
+    className: 'bg-[#f3f4f6] text-[#6b7280] border border-[#e5e7eb]',
   },
 }
 

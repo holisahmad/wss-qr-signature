@@ -91,19 +91,19 @@ export function LogoUpload({ orgId, currentLogoPath }: LogoUploadProps) {
         {/* Current logo preview */}
         {(previewUrl ?? currentLogoPath) && (
           <div>
-            <p className="text-[12px] text-[--color-text-secondary] mb-1">
+            <p className="text-[12px] text-[#6b7280] mb-1">
               {previewUrl ? 'New logo preview:' : 'Current logo:'}
             </p>
             <img
               src={previewUrl ?? `/uploads/logos/${currentLogoPath}`}
               alt="Organization logo preview"
-              className="h-16 w-auto border border-[--color-border] rounded bg-white p-1"
+              className="h-16 w-auto border border-[#e5e7eb] rounded bg-white p-1"
             />
           </div>
         )}
 
         <div>
-          <label htmlFor="logo-upload" className="text-[13px] font-medium text-[--color-text-primary] block mb-1">
+          <label htmlFor="logo-upload" className="text-[13px] font-medium text-[#111827] block mb-1">
             Upload New Logo
           </label>
           <input
@@ -113,14 +113,14 @@ export function LogoUpload({ orgId, currentLogoPath }: LogoUploadProps) {
             accept="image/png,image/jpeg,image/svg+xml"
             onChange={handleFileChange}
             aria-describedby={fileError ? 'logo-error' : 'logo-help'}
-            className="block w-full text-[13px] text-[--color-text-secondary] file:mr-3 file:py-1 file:px-3 file:rounded file:border file:border-[--color-border] file:bg-[--color-background] file:text-[13px] file:text-[--color-text-primary] hover:file:bg-[--color-surface] file:cursor-pointer"
+            className="block w-full text-[13px] text-[#6b7280] file:mr-3 file:py-1 file:px-3 file:rounded file:border file:border-[#e5e7eb] file:bg-[#f8f9fa] file:text-[13px] file:text-[#111827] hover:file:bg-[#ffffff] file:cursor-pointer"
           />
           {fileError ? (
-            <p id="logo-error" role="alert" className="mt-1 text-[12px] text-[--color-danger]">
+            <p id="logo-error" role="alert" className="mt-1 text-[12px] text-[#dc2626]">
               {fileError}
             </p>
           ) : (
-            <p id="logo-help" className="mt-1 text-[12px] text-[--color-text-secondary]">
+            <p id="logo-help" className="mt-1 text-[12px] text-[#6b7280]">
               PNG, JPEG, or SVG. Max 2 MB. Will be resized to ≤ 300×300 px.
             </p>
           )}

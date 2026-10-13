@@ -19,22 +19,22 @@ const typeConfig: Record<
 > = {
   success: {
     icon: <CheckCircle style={{ width: 16, height: 16 }} aria-hidden="true" />,
-    className: 'bg-[--color-success-bg] text-[--color-success] border-[--color-success]',
+    className: 'bg-[#dcfce7] text-[#15803d] border-[#15803d]',
     role: 'status',
   },
   error: {
     icon: <XCircle style={{ width: 16, height: 16 }} aria-hidden="true" />,
-    className: 'bg-[--color-danger-bg] text-[--color-danger] border-[--color-danger]',
+    className: 'bg-[#fee2e2] text-[#dc2626] border-[#dc2626]',
     role: 'alert',
   },
   info: {
     icon: <Info style={{ width: 16, height: 16 }} aria-hidden="true" />,
-    className: 'bg-blue-50 text-[--color-info] border-[--color-info]',
+    className: 'bg-blue-50 text-[#1d4ed8] border-[#1d4ed8]',
     role: 'status',
   },
   warning: {
     icon: <AlertTriangle style={{ width: 16, height: 16 }} aria-hidden="true" />,
-    className: 'bg-[--color-warning-bg] text-[--color-warning] border-[--color-warning]',
+    className: 'bg-[#fef3c7] text-[#b45309] border-[#b45309]',
     role: 'alert',
   },
 }

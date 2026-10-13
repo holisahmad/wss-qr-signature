@@ -11,20 +11,20 @@ export function Card({ title, children, footer, className = '' }: CardProps) {
   return (
     <div
       className={[
-        'bg-[--color-surface] border border-[--color-border] rounded',
+        'bg-[#ffffff] border border-[#e5e7eb] rounded',
         className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
       {title && (
-        <div className="px-4 py-3 border-b border-[--color-border]">
-          <h2 className="text-[14px] font-semibold text-[--color-text-primary]">{title}</h2>
+        <div className="px-4 py-3 border-b border-[#e5e7eb]">
+          <h2 className="text-[14px] font-semibold text-[#111827]">{title}</h2>
         </div>
       )}
       <div className="p-4">{children}</div>
       {footer && (
-        <div className="px-4 py-3 border-t border-[--color-border] bg-[--color-background] rounded-b">
+        <div className="px-4 py-3 border-t border-[#e5e7eb] bg-[#f8f9fa] rounded-b">
           {footer}
         </div>
       )}

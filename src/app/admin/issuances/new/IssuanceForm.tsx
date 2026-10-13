@@ -208,14 +208,14 @@ export function IssuanceForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
       {errors.general && (
-        <div role="alert" className="px-3 py-2.5 rounded border border-[--color-danger] bg-[--color-danger-bg] text-[14px] text-[--color-danger]">
+        <div role="alert" className="px-3 py-2.5 rounded border border-[#dc2626] bg-[#fee2e2] text-[14px] text-[#dc2626]">
           {errors.general}
         </div>
       )}
 
       {/* Document details */}
       <fieldset className="flex flex-col gap-4">
-        <legend className="text-[13px] font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-2">
+        <legend className="text-[13px] font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
           Document Details
         </legend>
 
@@ -253,7 +253,7 @@ export function IssuanceForm() {
         </div>
 
         {duplicate && (
-          <div role="status" className="px-3 py-2.5 rounded border border-[--color-warning] bg-[--color-warning-bg] text-[13px] text-[--color-warning]">
+          <div role="status" className="px-3 py-2.5 rounded border border-[#b45309] bg-[#fef3c7] text-[13px] text-[#b45309]">
             ⚠ A document with this number already exists for this organization (Ref:{' '}
             <a
               href={`/admin/issuances?search=${encodeURIComponent(duplicate.ref)}`}
@@ -299,7 +299,7 @@ export function IssuanceForm() {
 
       {/* Organization & Signer */}
       <fieldset className="flex flex-col gap-4">
-        <legend className="text-[13px] font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-2">
+        <legend className="text-[13px] font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
           Organization &amp; Signer
         </legend>
 
@@ -341,7 +341,7 @@ export function IssuanceForm() {
         )}
 
         {!orgId && (
-          <p className="text-[13px] text-[--color-text-secondary]">
+          <p className="text-[13px] text-[#6b7280]">
             Select an organization to load its units and signers.
           </p>
         )}
@@ -349,7 +349,7 @@ export function IssuanceForm() {
 
       {/* Admin notes */}
       <fieldset className="flex flex-col gap-4">
-        <legend className="text-[13px] font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-2">
+        <legend className="text-[13px] font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
           Internal Notes
         </legend>
         <Textarea
@@ -362,7 +362,7 @@ export function IssuanceForm() {
         />
       </fieldset>
 
-      <div className="flex items-center gap-3 pt-2 border-t border-[--color-border]">
+      <div className="flex items-center gap-3 pt-2 border-t border-[#e5e7eb]">
         <Button type="submit" variant="primary" size="md" loading={loading}>
           Create Draft Issuance
         </Button>

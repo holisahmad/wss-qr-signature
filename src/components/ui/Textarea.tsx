@@ -26,10 +26,10 @@ export function Textarea({
 
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-[13px] font-medium text-[--color-text-primary]">
+      <label htmlFor={id} className="text-[13px] font-medium text-[#111827]">
         {label}
         {required && (
-          <span className="text-[--color-danger] ml-0.5" aria-hidden="true">
+          <span className="text-[#dc2626] ml-0.5" aria-hidden="true">
             *
           </span>
         )}
@@ -45,24 +45,24 @@ export function Textarea({
           undefined
         }
         className={[
-          'w-full rounded border bg-[--color-surface] px-3 py-2 text-[14px] text-[--color-text-primary]',
-          'placeholder:text-[--color-muted] transition-colors resize-y min-h-[80px]',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] focus-visible:ring-offset-0',
+          'w-full rounded border bg-[#ffffff] px-3 py-2 text-[14px] text-[#111827]',
+          'placeholder:text-[#9ca3af] transition-colors resize-y min-h-[80px]',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-0',
           error
-            ? 'border-[--color-danger] focus-visible:ring-[--color-danger]'
-            : 'border-[--color-border]',
+            ? 'border-[#dc2626] focus-visible:ring-[#dc2626]'
+            : 'border-[#e5e7eb]',
           className,
         ]
           .filter(Boolean)
           .join(' ')}
       />
       {error && (
-        <p id={errorId} role="alert" className="text-[12px] text-[--color-danger]">
+        <p id={errorId} role="alert" className="text-[12px] text-[#dc2626]">
           {error}
         </p>
       )}
       {helperText && !error && (
-        <p id={helperId} className="text-[12px] text-[--color-text-secondary]">
+        <p id={helperId} className="text-[12px] text-[#6b7280]">
           {helperText}
         </p>
       )}

@@ -16,10 +16,10 @@ function StatsSkeleton() {
     <div className="flex flex-col gap-6 animate-pulse">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="bg-[--color-surface] border border-[--color-border] rounded p-4 h-24" />
+          <div key={i} className="bg-[#ffffff] border border-[#e5e7eb] rounded p-4 h-24" />
         ))}
       </div>
-      <div className="bg-[--color-surface] border border-[--color-border] rounded h-48" />
+      <div className="bg-[#ffffff] border border-[#e5e7eb] rounded h-48" />
     </div>
   )
 }

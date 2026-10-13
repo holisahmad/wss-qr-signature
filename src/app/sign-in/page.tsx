@@ -17,12 +17,12 @@ export default async function SignInPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[--color-background] px-4">
+    <main className="min-h-screen flex items-center justify-center bg-[#f8f9fa] px-4">
       <div className="w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
           <div
-            className="inline-flex items-center justify-center w-12 h-12 rounded bg-[--color-brand] text-white mb-4"
+            className="inline-flex items-center justify-center w-12 h-12 rounded bg-[#1e3a5f] text-white mb-4"
             aria-hidden="true"
           >
             <svg
@@ -45,17 +45,17 @@ export default async function SignInPage() {
               <rect x="19" y="14" width="2" height="2" />
             </svg>
           </div>
-          <h1 className="text-[20px] font-semibold text-[--color-text-primary]">
+          <h1 className="text-[20px] font-semibold text-[#111827]">
             WSS QR Signature
           </h1>
-          <p className="mt-1 text-[14px] text-[--color-text-secondary]">
+          <p className="mt-1 text-[14px] text-[#6b7280]">
             Document Issuance &amp; Verification System
           </p>
         </div>
 
         {/* Sign-in card */}
-        <div className="bg-[--color-surface] border border-[--color-border] rounded p-6">
-          <h2 className="text-[16px] font-semibold text-[--color-text-primary] mb-4">
+        <div className="bg-[#ffffff] border border-[#e5e7eb] rounded p-6">
+          <h2 className="text-[16px] font-semibold text-[#111827] mb-4">
             Admin Sign In
           </h2>
           <Suspense fallback={null}>
@@ -63,7 +63,7 @@ export default async function SignInPage() {
           </Suspense>
         </div>
 
-        <p className="mt-4 text-center text-[12px] text-[--color-muted]">
+        <p className="mt-4 text-center text-[12px] text-[#9ca3af]">
           Access restricted to authorized administrators only.
         </p>
       </div>

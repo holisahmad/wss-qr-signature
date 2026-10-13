@@ -51,22 +51,22 @@ export async function DashboardStats() {
     <div className="flex flex-col gap-6">
       {/* Stat cards */}
       <section aria-label="Issuance statistics">
-        <h2 className="text-[13px] font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-3">
+        <h2 className="text-[13px] font-semibold text-[#6b7280] uppercase tracking-wide mb-3">
           Overview
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[--color-surface] border border-[--color-border] rounded p-4"
+              className="bg-[#ffffff] border border-[#e5e7eb] rounded p-4"
             >
-              <p className="text-[28px] font-bold text-[--color-brand] leading-none tabular-nums">
+              <p className="text-[28px] font-bold text-[#1e3a5f] leading-none tabular-nums">
                 {stat.value.toLocaleString()}
               </p>
-              <p className="mt-1 text-[13px] font-medium text-[--color-text-primary]">
+              <p className="mt-1 text-[13px] font-medium text-[#111827]">
                 {stat.label}
               </p>
-              <p className="mt-0.5 text-[12px] text-[--color-text-secondary]">
+              <p className="mt-0.5 text-[12px] text-[#6b7280]">
                 {stat.description}
               </p>
             </div>
@@ -77,22 +77,22 @@ export async function DashboardStats() {
       {/* Recent issuances */}
       <section aria-label="Recent issuances">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-[13px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+          <h2 className="text-[13px] font-semibold text-[#6b7280] uppercase tracking-wide">
             Recent Issuances
           </h2>
           <Link
             href="/admin/issuances"
-            className="text-[13px] text-[--color-accent] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] rounded"
+            className="text-[13px] text-[#2563eb] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] rounded"
           >
             View all →
           </Link>
         </div>
 
-        <div className="bg-[--color-surface] border border-[--color-border] rounded overflow-hidden">
+        <div className="bg-[#ffffff] border border-[#e5e7eb] rounded overflow-hidden">
           {recentIssuances.length === 0 ? (
-            <p className="px-4 py-8 text-center text-[14px] text-[--color-text-secondary]">
+            <p className="px-4 py-8 text-center text-[14px] text-[#6b7280]">
               No issuances yet.{' '}
-              <Link href="/admin/issuances/new" className="text-[--color-accent] hover:underline">
+              <Link href="/admin/issuances/new" className="text-[#2563eb] hover:underline">
                 Create the first one
               </Link>
               .
@@ -100,20 +100,20 @@ export async function DashboardStats() {
           ) : (
             <table className="w-full text-[14px]">
               <thead>
-                <tr className="border-b border-[--color-border] bg-[--color-background]">
-                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+                <tr className="border-b border-[#e5e7eb] bg-[#f8f9fa]">
+                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide">
                     Title
                   </th>
-                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide hidden sm:table-cell">
+                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide hidden sm:table-cell">
                     Signer
                   </th>
-                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide">
                     Status
                   </th>
-                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide hidden md:table-cell">
+                  <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide hidden md:table-cell">
                     Created
                   </th>
-                  <th scope="col" className="px-4 py-2.5 text-right text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+                  <th scope="col" className="px-4 py-2.5 text-right text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide">
                     <span className="sr-only">Actions</span>
                   </th>
                 </tr>
@@ -123,20 +123,20 @@ export async function DashboardStats() {
                   <tr
                     key={issuance.id}
                     className={[
-                      'hover:bg-[--color-background] transition-colors',
-                      idx < recentIssuances.length - 1 ? 'border-b border-[--color-border]' : '',
+                      'hover:bg-[#f8f9fa] transition-colors',
+                      idx < recentIssuances.length - 1 ? 'border-b border-[#e5e7eb]' : '',
                     ].join(' ')}
                   >
-                    <td className="px-4 py-3 text-[--color-text-primary] font-medium max-w-[200px] truncate">
+                    <td className="px-4 py-3 text-[#111827] font-medium max-w-[200px] truncate">
                       {issuance.title}
                     </td>
-                    <td className="px-4 py-3 text-[--color-text-secondary] hidden sm:table-cell">
+                    <td className="px-4 py-3 text-[#6b7280] hidden sm:table-cell">
                       {issuance.signer.fullName}
                     </td>
                     <td className="px-4 py-3">
                       <Badge status={issuance.status as DocumentStatus} />
                     </td>
-                    <td className="px-4 py-3 text-[--color-text-secondary] text-[13px] hidden md:table-cell">
+                    <td className="px-4 py-3 text-[#6b7280] text-[13px] hidden md:table-cell">
                       {new Intl.DateTimeFormat('id-ID', {
                         day: '2-digit',
                         month: 'short',
@@ -146,7 +146,7 @@ export async function DashboardStats() {
                     <td className="px-4 py-3 text-right">
                       <Link
                         href={`/admin/issuances/${issuance.id}`}
-                        className="text-[13px] text-[--color-accent] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] rounded"
+                        className="text-[13px] text-[#2563eb] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] rounded"
                       >
                         View
                       </Link>

@@ -57,7 +57,7 @@ export default async function SettingsPage() {
 
         {/* Organizational units */}
         <Card title="Organizational Units">
-          <p className="text-[13px] text-[--color-text-secondary] mb-4">
+          <p className="text-[13px] text-[#6b7280] mb-4">
             Units are departments or faculties within {org.name}. They are used to categorize
             issuances.
           </p>
@@ -72,9 +72,9 @@ export default async function SettingsPage() {
         </Card>
 
         {/* Info card */}
-        <div className="px-4 py-3 rounded border border-[--color-border] bg-[--color-background] text-[13px] text-[--color-text-secondary]">
+        <div className="px-4 py-3 rounded border border-[#e5e7eb] bg-[#f8f9fa] text-[13px] text-[#6b7280]">
           <p>
-            <strong className="text-[--color-text-primary]">Organization slug:</strong>{' '}
+            <strong className="text-[#111827]">Organization slug:</strong>{' '}
             <span className="font-mono">{org.slug}</span> — used in internal identifiers.
             Contact system administrator to change it.
           </p>

@@ -47,7 +47,7 @@ export function SignInForm() {
         <div
           role="alert"
           aria-live="assertive"
-          className="px-3 py-2.5 rounded border border-[--color-danger] bg-[--color-danger-bg] text-[14px] text-[--color-danger]"
+          className="px-3 py-2.5 rounded border border-[#dc2626] bg-[#fee2e2] text-[14px] text-[#dc2626]"
         >
           {error}
         </div>

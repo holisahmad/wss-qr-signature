@@ -27,14 +27,14 @@ export function IssuanceTable({ issuances, total, page, pageSize }: IssuanceTabl
 
   if (issuances.length === 0) {
     return (
-      <div className="bg-[--color-surface] border border-[--color-border] rounded p-10 text-center">
-        <p className="text-[14px] text-[--color-text-secondary]">
+      <div className="bg-[#ffffff] border border-[#e5e7eb] rounded p-10 text-center">
+        <p className="text-[14px] text-[#6b7280]">
           No issuances match your filters.{' '}
-          <Link href="/admin/issuances" className="text-[--color-accent] hover:underline">
+          <Link href="/admin/issuances" className="text-[#2563eb] hover:underline">
             Clear filters
           </Link>{' '}
           or{' '}
-          <Link href="/admin/issuances/new" className="text-[--color-accent] hover:underline">
+          <Link href="/admin/issuances/new" className="text-[#2563eb] hover:underline">
             create your first issuance
           </Link>
           .
@@ -45,29 +45,29 @@ export function IssuanceTable({ issuances, total, page, pageSize }: IssuanceTabl
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-x-auto rounded border border-[--color-border]">
+      <div className="overflow-x-auto rounded border border-[#e5e7eb]">
         <table className="w-full text-[14px] border-collapse">
           <thead>
-            <tr className="border-b border-[--color-border] bg-[--color-background]">
-              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+            <tr className="border-b border-[#e5e7eb] bg-[#f8f9fa]">
+              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide">
                 Title
               </th>
-              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide hidden sm:table-cell">
+              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide hidden sm:table-cell">
                 Doc Number
               </th>
-              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide hidden md:table-cell">
+              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide hidden md:table-cell">
                 Signer
               </th>
-              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide hidden lg:table-cell">
+              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide hidden lg:table-cell">
                 Organization
               </th>
-              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide">
                 Status
               </th>
-              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide hidden md:table-cell">
+              <th scope="col" className="px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide hidden md:table-cell">
                 Created
               </th>
-              <th scope="col" className="px-4 py-2.5 text-right text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide">
+              <th scope="col" className="px-4 py-2.5 text-right text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide">
                 <span className="sr-only">Actions</span>
               </th>
             </tr>
@@ -77,22 +77,22 @@ export function IssuanceTable({ issuances, total, page, pageSize }: IssuanceTabl
               <tr
                 key={issuance.id}
                 className={[
-                  'hover:bg-[--color-background] transition-colors',
-                  idx < issuances.length - 1 ? 'border-b border-[--color-border]' : '',
+                  'hover:bg-[#f8f9fa] transition-colors',
+                  idx < issuances.length - 1 ? 'border-b border-[#e5e7eb]' : '',
                 ].join(' ')}
               >
-                <td className="px-4 py-3 text-[--color-text-primary] font-medium max-w-[200px]">
+                <td className="px-4 py-3 text-[#111827] font-medium max-w-[200px]">
                   <span className="block truncate" title={issuance.title}>
                     {issuance.title}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-[--color-text-secondary] font-mono text-[13px] hidden sm:table-cell">
+                <td className="px-4 py-3 text-[#6b7280] font-mono text-[13px] hidden sm:table-cell">
                   {issuance.docNumber}
                 </td>
-                <td className="px-4 py-3 text-[--color-text-secondary] hidden md:table-cell">
+                <td className="px-4 py-3 text-[#6b7280] hidden md:table-cell">
                   {issuance.signer.fullName}
                 </td>
-                <td className="px-4 py-3 text-[--color-text-secondary] hidden lg:table-cell max-w-[140px]">
+                <td className="px-4 py-3 text-[#6b7280] hidden lg:table-cell max-w-[140px]">
                   <span className="block truncate" title={issuance.org.name}>
                     {issuance.org.name}
                   </span>
@@ -100,7 +100,7 @@ export function IssuanceTable({ issuances, total, page, pageSize }: IssuanceTabl
                 <td className="px-4 py-3">
                   <Badge status={issuance.status as DocumentStatus} />
                 </td>
-                <td className="px-4 py-3 text-[--color-text-secondary] text-[13px] hidden md:table-cell">
+                <td className="px-4 py-3 text-[#6b7280] text-[13px] hidden md:table-cell">
                   {new Intl.DateTimeFormat('id-ID', {
                     day: '2-digit',
                     month: 'short',
@@ -110,7 +110,7 @@ export function IssuanceTable({ issuances, total, page, pageSize }: IssuanceTabl
                 <td className="px-4 py-3 text-right">
                   <Link
                     href={`/admin/issuances/${issuance.id}`}
-                    className="text-[13px] text-[--color-accent] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] rounded"
+                    className="text-[13px] text-[#2563eb] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] rounded"
                   >
                     View
                   </Link>
@@ -122,7 +122,7 @@ export function IssuanceTable({ issuances, total, page, pageSize }: IssuanceTabl
       </div>
 
       {/* Pagination info + links */}
-      <div className="flex items-center justify-between px-1 text-[13px] text-[--color-text-secondary]">
+      <div className="flex items-center justify-between px-1 text-[13px] text-[#6b7280]">
         <span>
           {total === 0 ? 'No results' : `${from}–${to} of ${total} issuances`}
         </span>
@@ -144,7 +144,7 @@ function PageLink({ page, label }: { page: number; label: string }) {
   return (
     <Link
       href={`?page=${page}`}
-      className="px-2 py-1 rounded border border-[--color-border] bg-[--color-surface] text-[13px] hover:bg-[--color-background] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+      className="px-2 py-1 rounded border border-[#e5e7eb] bg-[#ffffff] text-[13px] hover:bg-[#f8f9fa] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
     >
       {label}
     </Link>

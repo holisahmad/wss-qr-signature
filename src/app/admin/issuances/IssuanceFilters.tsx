@@ -76,7 +76,7 @@ export function IssuanceFilters({
     >
       {/* Search */}
       <div className="flex flex-col gap-1 min-w-[180px]">
-        <label htmlFor="filter-search" className="text-[12px] font-medium text-[--color-text-secondary]">
+        <label htmlFor="filter-search" className="text-[12px] font-medium text-[#6b7280]">
           Search
         </label>
         <input
@@ -90,20 +90,20 @@ export function IssuanceFilters({
             }
           }}
           onBlur={(e) => updateParam('search', e.target.value)}
-          className="h-8 rounded border border-[--color-border] bg-[--color-surface] px-3 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="h-8 rounded border border-[#e5e7eb] bg-[#ffffff] px-3 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         />
       </div>
 
       {/* Status */}
       <div className="flex flex-col gap-1">
-        <label htmlFor="filter-status" className="text-[12px] font-medium text-[--color-text-secondary]">
+        <label htmlFor="filter-status" className="text-[12px] font-medium text-[#6b7280]">
           Status
         </label>
         <select
           id="filter-status"
           value={currentStatus}
           onChange={(e) => updateParam('status', e.target.value)}
-          className="h-8 rounded border border-[--color-border] bg-[--color-surface] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="h-8 rounded border border-[#e5e7eb] bg-[#ffffff] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           {STATUS_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -113,14 +113,14 @@ export function IssuanceFilters({
 
       {/* Organization */}
       <div className="flex flex-col gap-1">
-        <label htmlFor="filter-org" className="text-[12px] font-medium text-[--color-text-secondary]">
+        <label htmlFor="filter-org" className="text-[12px] font-medium text-[#6b7280]">
           Organization
         </label>
         <select
           id="filter-org"
           value={currentOrgId}
           onChange={(e) => updateParam('orgId', e.target.value)}
-          className="h-8 rounded border border-[--color-border] bg-[--color-surface] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="h-8 rounded border border-[#e5e7eb] bg-[#ffffff] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           <option value="">All Organizations</option>
           {orgs.map((org) => (
@@ -131,7 +131,7 @@ export function IssuanceFilters({
 
       {/* Date from */}
       <div className="flex flex-col gap-1">
-        <label htmlFor="filter-from" className="text-[12px] font-medium text-[--color-text-secondary]">
+        <label htmlFor="filter-from" className="text-[12px] font-medium text-[#6b7280]">
           From
         </label>
         <input
@@ -139,13 +139,13 @@ export function IssuanceFilters({
           type="date"
           value={currentDateFrom}
           onChange={(e) => updateParam('dateFrom', e.target.value)}
-          className="h-8 rounded border border-[--color-border] bg-[--color-surface] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="h-8 rounded border border-[#e5e7eb] bg-[#ffffff] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         />
       </div>
 
       {/* Date to */}
       <div className="flex flex-col gap-1">
-        <label htmlFor="filter-to" className="text-[12px] font-medium text-[--color-text-secondary]">
+        <label htmlFor="filter-to" className="text-[12px] font-medium text-[#6b7280]">
           To
         </label>
         <input
@@ -153,20 +153,20 @@ export function IssuanceFilters({
           type="date"
           value={currentDateTo}
           onChange={(e) => updateParam('dateTo', e.target.value)}
-          className="h-8 rounded border border-[--color-border] bg-[--color-surface] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="h-8 rounded border border-[#e5e7eb] bg-[#ffffff] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         />
       </div>
 
       {/* Sort */}
       <div className="flex flex-col gap-1">
-        <label htmlFor="filter-sort" className="text-[12px] font-medium text-[--color-text-secondary]">
+        <label htmlFor="filter-sort" className="text-[12px] font-medium text-[#6b7280]">
           Sort
         </label>
         <select
           id="filter-sort"
           value={currentSort}
           onChange={(e) => updateParam('sort', e.target.value)}
-          className="h-8 rounded border border-[--color-border] bg-[--color-surface] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="h-8 rounded border border-[#e5e7eb] bg-[#ffffff] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           {SORT_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -178,14 +178,14 @@ export function IssuanceFilters({
       {hasFilters && (
         <button
           onClick={clearAll}
-          className="h-8 px-3 text-[13px] text-[--color-text-secondary] hover:text-[--color-text-primary] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] rounded"
+          className="h-8 px-3 text-[13px] text-[#6b7280] hover:text-[#111827] underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] rounded"
         >
           Clear filters
         </button>
       )}
 
       {isPending && (
-        <p className="text-[12px] text-[--color-text-secondary]" role="status" aria-live="polite">
+        <p className="text-[12px] text-[#6b7280]" role="status" aria-live="polite">
           Loading…
         </p>
       )}

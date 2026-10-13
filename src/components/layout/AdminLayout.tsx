@@ -40,14 +40,14 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
   const sidebar = (
     <nav className="flex flex-col h-full" aria-label="Admin navigation">
       {/* Brand */}
-      <div className="px-4 py-4 border-b border-[--color-border]">
+      <div className="px-4 py-4 border-b border-[#e5e7eb]">
         <Link
           href="/admin"
-          className="block text-[15px] font-semibold text-[--color-brand] leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] rounded"
+          className="block text-[15px] font-semibold text-[#1e3a5f] leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] rounded"
           onClick={() => setMobileOpen(false)}
         >
           WSS QR Signature
-          <span className="block text-[11px] font-normal text-[--color-text-secondary] mt-0.5">
+          <span className="block text-[11px] font-normal text-[#6b7280] mt-0.5">
             Document Issuance System
           </span>
         </Link>
@@ -65,10 +65,10 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
                 onClick={() => setMobileOpen(false)}
                 className={[
                   'flex items-center gap-2.5 px-3 py-2 rounded text-[14px] transition-colors',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]',
                   active
-                    ? 'bg-[--color-background] text-[--color-brand] font-medium border-l-2 border-[--color-brand] pl-[10px]'
-                    : 'text-[--color-text-secondary] hover:bg-[--color-background] hover:text-[--color-text-primary]',
+                    ? 'bg-[#f8f9fa] text-[#1e3a5f] font-medium border-l-2 border-[#1e3a5f] pl-[10px]'
+                    : 'text-[#6b7280] hover:bg-[#f8f9fa] hover:text-[#111827]',
                 ]
                   .filter(Boolean)
                   .join(' ')}
@@ -83,7 +83,7 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
                   <ChevronRight
                     style={{ width: 14, height: 14 }}
                     aria-hidden="true"
-                    className="ml-auto text-[--color-brand]"
+                    className="ml-auto text-[#1e3a5f]"
                   />
                 )}
               </Link>
@@ -93,20 +93,20 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
       </ul>
 
       {/* User section */}
-      <div className="px-2 py-2 border-t border-[--color-border]">
+      <div className="px-2 py-2 border-t border-[#e5e7eb]">
         {(userEmail || userName) && (
           <div className="px-3 py-1.5 mb-1">
-            <p className="text-[13px] font-medium text-[--color-text-primary] truncate">
+            <p className="text-[13px] font-medium text-[#111827] truncate">
               {userName ?? userEmail}
             </p>
             {userName && (
-              <p className="text-[11px] text-[--color-text-secondary] truncate">{userEmail}</p>
+              <p className="text-[11px] text-[#6b7280] truncate">{userEmail}</p>
             )}
           </div>
         )}
         <button
           onClick={() => signOut({ callbackUrl: '/sign-in' })}
-          className="flex w-full items-center gap-2 px-3 py-2 rounded text-[14px] text-[--color-text-secondary] hover:bg-[--color-background] hover:text-[--color-danger] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+          className="flex w-full items-center gap-2 px-3 py-2 rounded text-[14px] text-[#6b7280] hover:bg-[#f8f9fa] hover:text-[#dc2626] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
         >
           <LogOut style={{ width: 15, height: 15 }} aria-hidden="true" className="shrink-0" />
           Sign Out
@@ -116,10 +116,10 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
   )
 
   return (
-    <div className="flex min-h-screen bg-[--color-background]">
+    <div className="flex min-h-screen bg-[#f8f9fa]">
       {/* Desktop sidebar */}
       <aside
-        className="hidden md:flex flex-col w-60 shrink-0 border-r border-[--color-border] bg-[--color-surface] sticky top-0 h-screen"
+        className="hidden md:flex flex-col w-60 shrink-0 border-r border-[#e5e7eb] bg-[#ffffff] sticky top-0 h-screen"
         aria-label="Sidebar"
       >
         {sidebar}
@@ -138,12 +138,12 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
             aria-hidden="true"
             onClick={() => setMobileOpen(false)}
           />
-          <aside className="absolute left-0 top-0 h-full w-64 bg-[--color-surface] border-r border-[--color-border] z-10">
+          <aside className="absolute left-0 top-0 h-full w-64 bg-[#ffffff] border-r border-[#e5e7eb] z-10">
             <div className="absolute right-3 top-3">
               <button
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close navigation"
-                className="p-1 rounded text-[--color-text-secondary] hover:bg-[--color-background] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                className="p-1 rounded text-[#6b7280] hover:bg-[#f8f9fa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
               >
                 <X style={{ width: 18, height: 18 }} aria-hidden="true" />
               </button>
@@ -156,16 +156,16 @@ export function AdminLayout({ children, userEmail, userName }: AdminLayoutProps)
       {/* Main content */}
       <div className="flex flex-col flex-1 min-w-0">
         {/* Mobile top bar */}
-        <header className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-[--color-border] bg-[--color-surface] sticky top-0 z-30">
+        <header className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-[#e5e7eb] bg-[#ffffff] sticky top-0 z-30">
           <button
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation"
             aria-expanded={mobileOpen}
-            className="p-1.5 rounded text-[--color-text-secondary] hover:bg-[--color-background] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+            className="p-1.5 rounded text-[#6b7280] hover:bg-[#f8f9fa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
           >
             <Menu style={{ width: 20, height: 20 }} aria-hidden="true" />
           </button>
-          <span className="text-[14px] font-semibold text-[--color-brand]">WSS QR Signature</span>
+          <span className="text-[14px] font-semibold text-[#1e3a5f]">WSS QR Signature</span>
         </header>
 
         <main className="flex-1 p-4 md:p-6">{children}</main>

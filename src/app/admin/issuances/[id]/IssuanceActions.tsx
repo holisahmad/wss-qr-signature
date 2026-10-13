@@ -122,7 +122,7 @@ export function IssuanceActions({
               <a
                 href={`/api/issuances/${issuanceId}/assets/${signatureBlockAsset.id}`}
                 download="signature-block.png"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[--color-border] bg-[--color-surface] text-[13px] text-[--color-text-primary] hover:bg-[--color-background] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[#e5e7eb] bg-[#ffffff] text-[13px] text-[#111827] hover:bg-[#f8f9fa] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
               >
                 Download PNG
               </a>
@@ -134,7 +134,7 @@ export function IssuanceActions({
               href={verifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[--color-border] bg-[--color-surface] text-[13px] text-[--color-text-primary] hover:bg-[--color-background] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[#e5e7eb] bg-[#ffffff] text-[13px] text-[#111827] hover:bg-[#f8f9fa] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
             >
               View Public Page ↗
             </a>
@@ -158,12 +158,12 @@ export function IssuanceActions({
       {/* Revoke confirmation dialog */}
       <Dialog isOpen={revokeOpen} onClose={() => setRevokeOpen(false)} title="Revoke Issuance">
         <div className="flex flex-col gap-4">
-          <p className="text-[14px] text-[--color-text-primary]">
+          <p className="text-[14px] text-[#111827]">
             Revoking this issuance will mark it as revoked and it will no longer verify as valid.
             The document and its QR code remain in the system but will show as revoked.
           </p>
-          <p className="text-[13px] text-[--color-text-secondary]">
-            Issuance ref: <span className="font-mono text-[--color-text-primary]">{issuanceRef}</span>
+          <p className="text-[13px] text-[#6b7280]">
+            Issuance ref: <span className="font-mono text-[#111827]">{issuanceRef}</span>
           </p>
           <Textarea
             label="Reason for revocation"

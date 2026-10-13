@@ -15,7 +15,7 @@ export default function NewIssuancePage() {
         subtitle="Create a new document issuance. It will be saved as a draft until you issue it."
       />
       <div className="max-w-2xl">
-        <div className="bg-[--color-surface] border border-[--color-border] rounded p-5">
+        <div className="bg-[#ffffff] border border-[#e5e7eb] rounded p-5">
           <IssuanceForm />
         </div>
       </div>

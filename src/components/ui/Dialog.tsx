@@ -93,19 +93,19 @@ export function Dialog({
         aria-modal="true"
         aria-labelledby={titleId}
         className={[
-          'relative z-10 w-full bg-[--color-surface] rounded border border-[--color-border] shadow-lg',
+          'relative z-10 w-full bg-[#ffffff] rounded border border-[#e5e7eb] shadow-lg',
           maxWidth,
         ].join(' ')}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[--color-border]">
-          <h2 id={titleId} className="text-[15px] font-semibold text-[--color-text-primary]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#e5e7eb]">
+          <h2 id={titleId} className="text-[15px] font-semibold text-[#111827]">
             {title}
           </h2>
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="p-1 rounded text-[--color-text-secondary] hover:bg-[--color-background] hover:text-[--color-text-primary] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+            className="p-1 rounded text-[#6b7280] hover:bg-[#f8f9fa] hover:text-[#111827] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
           >
             <X style={{ width: 16, height: 16 }} aria-hidden="true" />
           </button>

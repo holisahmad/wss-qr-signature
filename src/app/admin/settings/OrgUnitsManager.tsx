@@ -119,7 +119,7 @@ export function OrgUnitsManager({ orgId, initialUnits }: OrgUnitsManagerProps) {
       <div className="flex flex-col gap-4">
         {/* Existing units */}
         {units.length === 0 ? (
-          <p className="text-[13px] text-[--color-text-secondary]">
+          <p className="text-[13px] text-[#6b7280]">
             No organizational units configured yet.
           </p>
         ) : (
@@ -128,33 +128,33 @@ export function OrgUnitsManager({ orgId, initialUnits }: OrgUnitsManagerProps) {
               editId === unit.id ? (
                 <li
                   key={unit.id}
-                  className="flex items-center gap-2 px-3 py-2 rounded border border-[--color-accent] bg-[--color-surface]"
+                  className="flex items-center gap-2 px-3 py-2 rounded border border-[#2563eb] bg-[#ffffff]"
                 >
                   <input
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
                     aria-label="Edit unit name"
-                    className="flex-1 h-7 rounded border border-[--color-border] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                    className="flex-1 h-7 rounded border border-[#e5e7eb] px-2 text-[13px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
                   />
                   <input
                     value={editCode}
                     onChange={(e) => setEditCode(e.target.value)}
                     aria-label="Edit unit code"
                     placeholder="Code"
-                    className="w-20 h-7 rounded border border-[--color-border] px-2 text-[13px] font-mono focus:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                    className="w-20 h-7 rounded border border-[#e5e7eb] px-2 text-[13px] font-mono focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
                   />
                   <button
                     onClick={() => saveEdit(unit.id)}
                     disabled={saving}
                     aria-label="Save changes"
-                    className="p-1 rounded text-[--color-success] hover:bg-[--color-success-bg] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                    className="p-1 rounded text-[#15803d] hover:bg-[#dcfce7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
                   >
                     <Check style={{ width: 14, height: 14 }} aria-hidden="true" />
                   </button>
                   <button
                     onClick={cancelEdit}
                     aria-label="Cancel edit"
-                    className="p-1 rounded text-[--color-text-secondary] hover:bg-[--color-background] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                    className="p-1 rounded text-[#6b7280] hover:bg-[#f8f9fa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
                   >
                     <X style={{ width: 14, height: 14 }} aria-hidden="true" />
                   </button>
@@ -162,27 +162,27 @@ export function OrgUnitsManager({ orgId, initialUnits }: OrgUnitsManagerProps) {
               ) : (
                 <li
                   key={unit.id}
-                  className="flex items-center gap-2 px-3 py-2 rounded border border-[--color-border] bg-[--color-surface] hover:bg-[--color-background] transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 rounded border border-[#e5e7eb] bg-[#ffffff] hover:bg-[#f8f9fa] transition-colors"
                 >
-                  <span className="flex-1 text-[14px] text-[--color-text-primary]">
+                  <span className="flex-1 text-[14px] text-[#111827]">
                     {unit.name}
                   </span>
                   {unit.code && (
-                    <span className="text-[12px] font-mono text-[--color-text-secondary] bg-[--color-muted-bg] px-1.5 py-0.5 rounded">
+                    <span className="text-[12px] font-mono text-[#6b7280] bg-[#f3f4f6] px-1.5 py-0.5 rounded">
                       {unit.code}
                     </span>
                   )}
                   <button
                     onClick={() => startEdit(unit)}
                     aria-label={`Edit unit ${unit.name}`}
-                    className="p-1 rounded text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-background] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent]"
+                    className="p-1 rounded text-[#6b7280] hover:text-[#111827] hover:bg-[#f8f9fa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
                   >
                     <Pencil style={{ width: 13, height: 13 }} aria-hidden="true" />
                   </button>
                   <button
                     onClick={() => handleDelete(unit.id, unit.name)}
                     aria-label={`Delete unit ${unit.name}`}
-                    className="p-1 rounded text-[--color-text-secondary] hover:text-[--color-danger] hover:bg-[--color-danger-bg] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-danger]"
+                    className="p-1 rounded text-[#6b7280] hover:text-[#dc2626] hover:bg-[#fee2e2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dc2626]"
                   >
                     <Trash2 style={{ width: 13, height: 13 }} aria-hidden="true" />
                   </button>
@@ -194,7 +194,7 @@ export function OrgUnitsManager({ orgId, initialUnits }: OrgUnitsManagerProps) {
 
         {/* Add new unit */}
         <form onSubmit={handleAdd} noValidate className="flex flex-col gap-2">
-          <p className="text-[13px] font-medium text-[--color-text-primary]">Add Unit</p>
+          <p className="text-[13px] font-medium text-[#111827]">Add Unit</p>
           <div className="flex gap-2 flex-wrap">
             <div className="flex-1 min-w-[160px]">
               <Input

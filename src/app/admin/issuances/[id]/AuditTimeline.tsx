@@ -27,7 +27,7 @@ export async function AuditTimeline({ issuanceId }: AuditTimelineProps) {
 
   if (events.length === 0) {
     return (
-      <p className="text-[13px] text-[--color-text-secondary]">No audit events recorded.</p>
+      <p className="text-[13px] text-[#6b7280]">No audit events recorded.</p>
     )
   }
 
@@ -41,16 +41,16 @@ export async function AuditTimeline({ issuanceId }: AuditTimelineProps) {
           <li key={event.id} className="flex gap-3">
             {/* Timeline line + dot */}
             <div className="flex flex-col items-center">
-              <div className="w-2 h-2 rounded-full bg-[--color-brand] shrink-0 mt-1.5" aria-hidden="true" />
+              <div className="w-2 h-2 rounded-full bg-[#1e3a5f] shrink-0 mt-1.5" aria-hidden="true" />
               {!isLast && (
-                <div className="w-px flex-1 bg-[--color-border] mt-1" aria-hidden="true" />
+                <div className="w-px flex-1 bg-[#e5e7eb] mt-1" aria-hidden="true" />
               )}
             </div>
 
             {/* Event content */}
             <div className={['pb-4', isLast ? '' : ''].join(' ')}>
-              <p className="text-[13px] font-medium text-[--color-text-primary]">{label}</p>
-              <p className="text-[12px] text-[--color-text-secondary]">
+              <p className="text-[13px] font-medium text-[#111827]">{label}</p>
+              <p className="text-[12px] text-[#6b7280]">
                 {event.actor ? `${event.actor.name ?? event.actor.email}` : 'System'}{' '}
                 &bull;{' '}
                 <time dateTime={event.createdAt.toISOString()}>

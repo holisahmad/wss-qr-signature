@@ -49,17 +49,17 @@ export function DataTable<T>({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-x-auto rounded border border-[--color-border]">
+      <div className="overflow-x-auto rounded border border-[#e5e7eb]">
         <table className="w-full text-[14px] border-collapse">
           <thead>
-            <tr className="border-b border-[--color-border] bg-[--color-background]">
+            <tr className="border-b border-[#e5e7eb] bg-[#f8f9fa]">
               {columns.map((col, i) => (
                 <th
                   key={i}
                   scope="col"
                   className={[
-                    'px-4 py-2.5 text-left text-[12px] font-semibold text-[--color-text-secondary] uppercase tracking-wide',
-                    col.sortKey ? 'cursor-pointer select-none hover:text-[--color-text-primary]' : '',
+                    'px-4 py-2.5 text-left text-[12px] font-semibold text-[#6b7280] uppercase tracking-wide',
+                    col.sortKey ? 'cursor-pointer select-none hover:text-[#111827]' : '',
                     col.className ?? '',
                   ]
                     .filter(Boolean)
@@ -79,7 +79,7 @@ export function DataTable<T>({
                     {col.header}
                     {col.sortKey && (
                       <ArrowUpDown
-                        className="text-[--color-muted]"
+                        className="text-[#9ca3af]"
                         style={{ width: 13, height: 13 }}
                         aria-hidden="true"
                       />
@@ -92,10 +92,10 @@ export function DataTable<T>({
           <tbody>
             {isLoading ? (
               Array.from({ length: 3 }).map((_, i) => (
-                <tr key={i} className="border-b border-[--color-border]">
+                <tr key={i} className="border-b border-[#e5e7eb]">
                   {columns.map((_, j) => (
                     <td key={j} className="px-4 py-3">
-                      <div className="h-4 rounded bg-[--color-muted-bg] animate-pulse" />
+                      <div className="h-4 rounded bg-[#f3f4f6] animate-pulse" />
                     </td>
                   ))}
                 </tr>
@@ -104,7 +104,7 @@ export function DataTable<T>({
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="px-4 py-10 text-center text-[--color-text-secondary]"
+                  className="px-4 py-10 text-center text-[#6b7280]"
                 >
                   {emptyMessage}
                 </td>
@@ -113,12 +113,12 @@ export function DataTable<T>({
               data.map((row) => (
                 <tr
                   key={getRowKey(row)}
-                  className="border-b border-[--color-border] last:border-0 hover:bg-[--color-background] transition-colors"
+                  className="border-b border-[#e5e7eb] last:border-0 hover:bg-[#f8f9fa] transition-colors"
                 >
                   {columns.map((col, j) => (
                     <td
                       key={j}
-                      className={['px-4 py-3 text-[--color-text-primary]', col.className ?? '']
+                      className={['px-4 py-3 text-[#111827]', col.className ?? '']
                         .filter(Boolean)
                         .join(' ')}
                     >
@@ -135,7 +135,7 @@ export function DataTable<T>({
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between px-1 text-[13px] text-[--color-text-secondary]">
+      <div className="flex items-center justify-between px-1 text-[13px] text-[#6b7280]">
         <span>
           {totalCount === 0
             ? 'No results'
@@ -146,7 +146,7 @@ export function DataTable<T>({
             onClick={() => onPageChange(page - 1)}
             disabled={page <= 1}
             aria-label="Previous page"
-            className="flex items-center gap-1 px-2 py-1 rounded border border-[--color-border] bg-[--color-surface] hover:bg-[--color-background] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1 px-2 py-1 rounded border border-[#e5e7eb] bg-[#ffffff] hover:bg-[#f8f9fa] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             <ChevronLeft style={{ width: 14, height: 14 }} aria-hidden="true" />
             Prev
@@ -158,7 +158,7 @@ export function DataTable<T>({
             onClick={() => onPageChange(page + 1)}
             disabled={page >= totalPages}
             aria-label="Next page"
-            className="flex items-center gap-1 px-2 py-1 rounded border border-[--color-border] bg-[--color-surface] hover:bg-[--color-background] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1 px-2 py-1 rounded border border-[#e5e7eb] bg-[#ffffff] hover:bg-[#f8f9fa] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             Next
             <ChevronRight style={{ width: 14, height: 14 }} aria-hidden="true" />

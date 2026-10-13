@@ -30,12 +30,12 @@ export function CopyURLButton() {
       type="button"
       onClick={handleCopy}
       aria-label={copied ? 'URL copied to clipboard' : 'Copy verification URL to clipboard'}
-      className="inline-flex items-center gap-2 rounded-md border border-[--color-border] bg-[--color-surface] px-4 py-2 text-sm font-medium text-[--color-text-secondary] transition hover:bg-[--color-muted-bg] focus-visible:ring-2 focus-visible:ring-[--color-accent] focus-visible:outline-none min-h-[44px]"
+      className="inline-flex items-center gap-2 rounded-md border border-[#e5e7eb] bg-[#ffffff] px-4 py-2 text-sm font-medium text-[#6b7280] transition hover:bg-[#f3f4f6] focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:outline-none min-h-[44px]"
     >
       {copied ? (
         <>
-          <Check className="size-4 text-[--color-success]" aria-hidden />
-          <span className="text-[--color-success]">Copied!</span>
+          <Check className="size-4 text-[#15803d]" aria-hidden />
+          <span className="text-[#15803d]">Copied!</span>
         </>
       ) : (
         <>

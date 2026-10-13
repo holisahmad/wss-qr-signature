@@ -33,13 +33,13 @@ function formatDate(date: Date): string {
 
 function NotFoundState() {
   return (
-    <main className="min-h-screen bg-[--color-background] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-lg rounded-xl border border-[--color-border] bg-[--color-surface] px-6 py-10 text-center shadow-sm">
+    <main className="min-h-screen bg-[#f8f9fa] flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-lg rounded-xl border border-[#e5e7eb] bg-[#ffffff] px-6 py-10 text-center shadow-sm">
         <p className="text-4xl">🔍</p>
-        <h1 className="mt-4 text-xl font-semibold text-[--color-text-primary]">
+        <h1 className="mt-4 text-xl font-semibold text-[#111827]">
           Verification record not found
         </h1>
-        <p className="mt-2 text-sm text-[--color-text-secondary]">
+        <p className="mt-2 text-sm text-[#6b7280]">
           The reference may be invalid or the record may not exist.
         </p>
       </div>
@@ -60,14 +60,14 @@ export default async function VerifyPage({ params }: PageProps) {
   const { document: doc, organization: org, organizationalUnit: unit, signer } = record
 
   return (
-    <main className="min-h-screen bg-[--color-background] px-4 py-8 sm:py-12">
+    <main className="min-h-screen bg-[#f8f9fa] px-4 py-8 sm:py-12">
       <div className="mx-auto w-full max-w-lg">
 
         {/* ── Card ── */}
-        <div className="rounded-xl border border-[--color-border] bg-[--color-surface] shadow-sm overflow-hidden">
+        <div className="rounded-xl border border-[#e5e7eb] bg-[#ffffff] shadow-sm overflow-hidden">
 
           {/* ── Header: org branding ── */}
-          <div className="border-b border-[--color-border] bg-[--color-brand] px-6 py-5">
+          <div className="border-b border-[#e5e7eb] bg-[#1e3a5f] px-6 py-5">
             <div className="flex items-center gap-4">
               {org.logoPath && (
                 <div className="shrink-0">
@@ -97,67 +97,67 @@ export default async function VerifyPage({ params }: PageProps) {
             <section aria-labelledby="doc-details-heading">
               <h2
                 id="doc-details-heading"
-                className="text-xs font-semibold uppercase tracking-wider text-[--color-text-secondary] mb-3"
+                className="text-xs font-semibold uppercase tracking-wider text-[#6b7280] mb-3"
               >
                 Document Details
               </h2>
               <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
                 {/* Full-width: document title */}
-                <div className="sm:col-span-2 rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Document Title</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="sm:col-span-2 rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Document Title</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {doc.title}
                   </dd>
                 </div>
 
-                <div className="rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Document Number</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Document Number</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {doc.docNumber}
                   </dd>
                 </div>
 
-                <div className="rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Document Type</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Document Type</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {doc.docType}
                   </dd>
                 </div>
 
-                <div className="rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Document Date</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Document Date</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {formatDate(doc.docDate)}
                   </dd>
                 </div>
 
-                <div className="rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Issued At</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Issued At</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {formatDate(doc.issuanceTimestamp)}
                   </dd>
                 </div>
 
-                <div className="rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Expires At</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Expires At</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {doc.expiresAt ? formatDate(doc.expiresAt) : 'No expiry'}
                   </dd>
                 </div>
 
                 {unit && (
-                  <div className="rounded-md bg-[--color-background] px-4 py-3">
-                    <dt className="text-xs text-[--color-text-secondary]">Department</dt>
-                    <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                  <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                    <dt className="text-xs text-[#6b7280]">Department</dt>
+                    <dd className="mt-1 text-sm font-medium text-[#111827]">
                       {unit.name}
                     </dd>
                   </div>
                 )}
 
-                <div className="rounded-md bg-[--color-background] px-4 py-3">
-                  <dt className="text-xs text-[--color-text-secondary]">Organization</dt>
-                  <dd className="mt-1 text-sm font-medium text-[--color-text-primary]">
+                <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                  <dt className="text-xs text-[#6b7280]">Organization</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#111827]">
                     {org.name}
                   </dd>
                 </div>
@@ -169,15 +169,15 @@ export default async function VerifyPage({ params }: PageProps) {
             <section aria-labelledby="signer-heading">
               <h2
                 id="signer-heading"
-                className="text-xs font-semibold uppercase tracking-wider text-[--color-text-secondary] mb-3"
+                className="text-xs font-semibold uppercase tracking-wider text-[#6b7280] mb-3"
               >
                 Signed By
               </h2>
-              <div className="rounded-md bg-[--color-background] px-4 py-3">
-                <p className="text-sm font-medium text-[--color-text-primary]">
+              <div className="rounded-md bg-[#f8f9fa] px-4 py-3">
+                <p className="text-sm font-medium text-[#111827]">
                   {signer.fullName}
                 </p>
-                <p className="text-sm text-[--color-text-secondary]">{signer.title}</p>
+                <p className="text-sm text-[#6b7280]">{signer.title}</p>
               </div>
             </section>
 
@@ -185,11 +185,11 @@ export default async function VerifyPage({ params }: PageProps) {
             <section aria-labelledby="ref-heading">
               <h2
                 id="ref-heading"
-                className="text-xs font-semibold uppercase tracking-wider text-[--color-text-secondary] mb-2"
+                className="text-xs font-semibold uppercase tracking-wider text-[#6b7280] mb-2"
               >
                 Verification Reference
               </h2>
-              <p className="rounded-md bg-[--color-muted-bg] px-4 py-3 font-mono text-xs text-[--color-text-secondary] break-all select-all">
+              <p className="rounded-md bg-[#f3f4f6] px-4 py-3 font-mono text-xs text-[#6b7280] break-all select-all">
                 {record.ref}
               </p>
             </section>
@@ -197,12 +197,12 @@ export default async function VerifyPage({ params }: PageProps) {
             {/* Disclaimer */}
             <div
               role="note"
-              className="flex items-start gap-3 rounded-md border border-[--color-warning] bg-[--color-warning-bg] px-4 py-3"
+              className="flex items-start gap-3 rounded-md border border-[#b45309] bg-[#fef3c7] px-4 py-3"
             >
-              <span className="mt-0.5 shrink-0 text-[--color-warning]" aria-hidden="true">
+              <span className="mt-0.5 shrink-0 text-[#b45309]" aria-hidden="true">
                 ⚠
               </span>
-              <p className="text-sm text-[--color-warning]">
+              <p className="text-sm text-[#b45309]">
                 This page verifies the issuance record only. It does not verify the integrity or
                 authenticity of the document file itself.
               </p>
@@ -216,8 +216,8 @@ export default async function VerifyPage({ params }: PageProps) {
           </div>
 
           {/* ── Footer ── */}
-          <div className="border-t border-[--color-border] bg-[--color-background] px-6 py-3 text-center">
-            <p className="text-xs text-[--color-text-secondary]">Powered by WSS QR Signature</p>
+          <div className="border-t border-[#e5e7eb] bg-[#f8f9fa] px-6 py-3 text-center">
+            <p className="text-xs text-[#6b7280]">Powered by WSS QR Signature</p>
           </div>
 
         </div>
