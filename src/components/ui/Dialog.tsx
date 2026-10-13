@@ -28,11 +28,18 @@ export function Dialog({
 
     const previousFocus = document.activeElement as HTMLElement | null
 
-    // Focus first focusable element in dialog
-    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    // Focus first focusable element that is NOT the close button
+    // The close button is always the first button in the header — skip it
+    const focusable = Array.from(
+      dialogRef.current?.querySelectorAll<HTMLElement>(
+        'input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]):not([aria-label="Close dialog"]), [href], [tabindex]:not([tabindex="-1"])'
+      ) ?? []
     )
-    focusable?.[0]?.focus()
+    // Prefer first input/select/textarea, fallback to first focusable
+    const firstInput = focusable.find((el) =>
+      ['INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName)
+    )
+    ;(firstInput ?? focusable[0])?.focus()
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {

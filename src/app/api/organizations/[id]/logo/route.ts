@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { nanoid } from 'nanoid'
 import path from 'path'
 import fs from 'fs'
@@ -13,6 +13,45 @@ type RouteContext = { params: Promise<{ id: string }> }
 
 const ALLOWED_MIME_TYPES = ['image/png', 'image/jpeg', 'image/svg+xml']
 const MAX_SIZE_BYTES = 2 * 1024 * 1024 // 2 MB
+
+// GET /api/organizations/[id]/logo — serve logo file (public, no auth required)
+export async function GET(_request: NextRequest, context: RouteContext) {
+  const { id } = await context.params
+
+  const org = await db.organization.findUnique({
+    where: { id },
+    select: { logoPath: true },
+  })
+
+  if (!org?.logoPath) {
+    return new NextResponse(null, { status: 404 })
+  }
+
+  const uploadDir = process.env.UPLOAD_DIR ?? path.join(process.cwd(), 'uploads')
+  // logoPath may be stored as filename only or as a legacy absolute path
+  const filePath = org.logoPath.startsWith('/')
+    ? org.logoPath
+    : path.join(uploadDir, 'logos', org.logoPath)
+
+  try {
+    const buffer = fs.readFileSync(filePath)
+    const ext = path.extname(filePath).toLowerCase()
+    const contentType =
+      ext === '.svg' ? 'image/svg+xml' :
+      ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg' :
+      'image/png'
+
+    return new NextResponse(buffer, {
+      status: 200,
+      headers: {
+        'Content-Type': contentType,
+        'Cache-Control': 'public, max-age=86400',
+      },
+    })
+  } catch {
+    return new NextResponse(null, { status: 404 })
+  }
+}
 
 // POST /api/organizations/[id]/logo — upload and normalize org logo
 export async function POST(request: NextRequest, context: RouteContext) {
@@ -90,16 +129,19 @@ export async function POST(request: NextRequest, context: RouteContext) {
   // Remove old logo file if it exists
   if (org.logoPath) {
     try {
-      fs.unlinkSync(org.logoPath)
+      const oldPath = org.logoPath.startsWith('/')
+        ? org.logoPath
+        : path.join(logosDir, org.logoPath)
+      fs.unlinkSync(oldPath)
     } catch {
       // Non-fatal: old file may already be gone
     }
   }
 
-  // Update organization record
+  // Update organization record — store only the filename, not the full path
   const updated = await db.organization.update({
     where: { id },
-    data: { logoPath: logoFilePath },
+    data: { logoPath: filename },
     select: { id: true, name: true, logoPath: true },
   })
 

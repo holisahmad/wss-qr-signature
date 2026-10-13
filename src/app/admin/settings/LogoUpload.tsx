@@ -70,7 +70,9 @@ export function LogoUpload({ orgId, currentLogoPath }: LogoUploadProps) {
       const json = await res.json()
 
       if (!res.ok) {
-        showToast(json.error?.message ?? 'Upload failed.', 'error')
+        const msg = json.error?.message ?? 'Upload failed.'
+        setFileError(msg)
+        showToast(msg, 'error')
       } else {
         showToast('Logo updated successfully.', 'success')
         if (fileRef.current) fileRef.current.value = ''
@@ -95,9 +97,13 @@ export function LogoUpload({ orgId, currentLogoPath }: LogoUploadProps) {
               {previewUrl ? 'New logo preview:' : 'Current logo:'}
             </p>
             <img
-              src={previewUrl ?? `/uploads/logos/${currentLogoPath}`}
+              src={previewUrl ?? `/api/organizations/${orgId}/logo`}
               alt="Organization logo preview"
               className="h-16 w-auto border border-[#e5e7eb] rounded bg-white p-1"
+              onError={(e) => {
+                // Hide broken image if logo file is missing
+                ;(e.target as HTMLImageElement).style.display = 'none'
+              }}
             />
           </div>
         )}
