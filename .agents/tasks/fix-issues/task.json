@@ -1,0 +1,7 @@
+{
+  "task_id": "task-fix-issues",
+  "task_description": "Fix four grouped issues on the running WSS QR Signature app: (1) Next.js 16.x blocking prerender error on /sign-in, (2) signer CRUD with soft delete, (3) audit log LOGIN/LOGOUT/SIGNER_* events + 60-day cleanup + viewer page, (4) no credentials in URL (already OK — verify only). Issues are ordered by dependency: sign-in fix first so build stays green, then schema migration, then API/UI built on it, then audit events layered on top of audit infrastructure.",
+  "status": "pending",
+  "feature_order": ["FEAT-F01", "FEAT-F02", "FEAT-F03", "FEAT-F04"],
+  "blocked_reason": null
+}

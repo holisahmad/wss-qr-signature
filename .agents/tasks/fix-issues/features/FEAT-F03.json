@@ -1,0 +1,26 @@
+{
+  "id": "FEAT-F03",
+  "type": "feat",
+  "description": "Add missing audit log events (LOGIN, LOGOUT, SIGNER_CREATED, SIGNER_UPDATED, SIGNER_DELETED) and 60-day retention cleanup. SIGNER_* events are written inside the API routes created in FEAT-F02 — this FEAT only adds LOGIN/LOGOUT to auth.ts and the cleanup endpoint. This FEAT depends on FEAT-F02 (SIGNER_* events are already handled there). Independent of FEAT-F04.",
+  "status": "pending",
+  "steps": [
+    "Open src/auth.ts. Add an `events` object to the NextAuth config alongside the existing `providers`, `session`, `callbacks`, and `pages` keys. The events object needs two handlers: (1) `signIn: async ({ user }) => { if (user?.id) { await writeAuditEvent({ action: 'LOGIN', entityType: 'User', entityId: user.id, actorId: user.id, meta: { email: user.email ?? undefined } }) } }`. (2) `signOut: async ({ token }) => { const id = token?.id as string | undefined; if (id) { await writeAuditEvent({ action: 'LOGOUT', entityType: 'User', entityId: id, actorId: id }) } }`. Import `writeAuditEvent` from '@/lib/audit' at the top of the file. The `writeAuditEvent` function already never throws, so no try/catch needed. The NextAuth v5 beta `events.signIn` receives `{ user, account, isNewUser }` and `events.signOut` receives `{ token, session }` — use only what is available. If the type signature from next-auth for signOut does not provide token, use session?.user?.id instead. Compile-check by running `npm run typecheck`.",
+
+    "Create src/app/api/admin/audit/cleanup/route.ts. POST handler only. Authenticate with `requireAdmin()`. Compute cutoff = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000). Run `const result = await db.auditEvent.deleteMany({ where: { createdAt: { lt: cutoff } } })`. Write an audit event for the cleanup action itself: `writeAuditEvent({ action: 'AUDIT_CLEANUP', entityType: 'AuditEvent', entityId: 'bulk', actorId: session.user.id, meta: { deletedCount: result.count, cutoffDate: cutoff.toISOString() } })`. Return `apiSuccess({ deletedCount: result.count, cutoffDate: cutoff.toISOString() })`. This endpoint is called manually from the audit viewer page and can later be wired to a cron job.",
+
+    "Run `npm run typecheck` and `npm run build` to confirm no errors."
+  ],
+  "acceptance_criteria": [
+    "src/auth.ts has `events.signIn` that calls writeAuditEvent with action 'LOGIN'",
+    "src/auth.ts has `events.signOut` that calls writeAuditEvent with action 'LOGOUT'",
+    "POST /api/admin/audit/cleanup deletes AuditEvent rows older than 60 days and returns deleted count",
+    "`npm run typecheck` exits 0",
+    "`npm run build` exits 0"
+  ],
+  "verification": [
+    "npm run typecheck",
+    "npm run build"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
