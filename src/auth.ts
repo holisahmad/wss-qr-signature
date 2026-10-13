@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { compareSync } from 'bcryptjs'
 import { db } from '@/lib/db'
 import type { UserRole } from '@/generated/prisma/enums'
+import { writeAuditEvent } from '@/lib/audit'
 
 declare module 'next-auth' {
   interface User {
@@ -89,5 +90,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   pages: {
     signIn: '/sign-in',
+  },
+  events: {
+    async signIn({ user }) {
+      if (user?.id) {
+        await writeAuditEvent({
+          action: 'LOGIN',
+          entityType: 'User',
+          entityId: user.id,
+          actorId: user.id,
+          meta: { email: user.email ?? undefined },
+        })
+      }
+    },
+    async signOut(message) {
+      // NextAuth v5: signOut event may receive { token } or { session }
+      const id =
+        (message as { token?: { id?: string } }).token?.id ??
+        (message as { session?: { user?: { id?: string } } }).session?.user?.id
+      if (id) {
+        await writeAuditEvent({
+          action: 'LOGOUT',
+          entityType: 'User',
+          entityId: id,
+          actorId: id,
+        })
+      }
+    },
   },
 })

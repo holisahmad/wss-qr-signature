@@ -13,6 +13,7 @@ import {
   LogOut,
   ChevronRight,
   Users,
+  History,
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { href: '/admin/issuances', label: 'Issuances', icon: FileText, exact: false },
   { href: '/admin/issuances/new', label: 'New Issuance', icon: PlusCircle, exact: true },
   { href: '/admin/signers', label: 'Signers', icon: Users, exact: false },
+  { href: '/admin/audit', label: 'Audit Log', icon: History, exact: false },
   { href: '/admin/settings', label: 'Settings', icon: Settings, exact: false },
 ]
 
