@@ -82,6 +82,7 @@ model Signer {
   isActive   Boolean   @default(true)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   issuances  DocumentIssuance[]
 }

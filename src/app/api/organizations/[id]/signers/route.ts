@@ -18,7 +18,7 @@ export async function GET(
   const { id } = await params
 
   const signers = await db.signer.findMany({
-    where: { orgId: id, isActive: true },
+    where: { orgId: id, isActive: true, deletedAt: null },
     orderBy: { fullName: 'asc' },
     select: {
       id: true,
