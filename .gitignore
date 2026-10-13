@@ -63,3 +63,14 @@ src/generated/
 /uploads/
 
 /src/generated/prisma
+
+# AI coding tool internals — never commit these
+.agents/
+.claude/
+.windsurf/
+.kiro/
+.cursor/
+
+# Build artifacts
+tsconfig.tsbuildinfo
+skills-lock.json
