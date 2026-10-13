@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { getPublicVerification } from '@/lib/services/verification-service'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { CopyURLButton } from '@/components/ui/CopyURLButton'
@@ -71,8 +70,9 @@ export default async function VerifyPage({ params }: PageProps) {
             <div className="flex items-center gap-4">
               {org.logoPath && (
                 <div className="shrink-0">
-                  <Image
-                    src={org.logoPath}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/api/organizations/${org.id}/logo`}
                     alt={`${org.name} logo`}
                     width={80}
                     height={80}

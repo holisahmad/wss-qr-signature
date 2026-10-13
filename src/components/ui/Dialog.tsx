@@ -21,21 +21,22 @@ export function Dialog({
 }: DialogProps) {
   const titleId = useId()
   const dialogRef = useRef<HTMLDivElement>(null)
+  // Keep a stable ref to onClose so useEffect dependency doesn't change on every parent render
+  const onCloseRef = useRef(onClose)
+  useEffect(() => { onCloseRef.current = onClose }, [onClose])
 
-  // Focus trap + Escape key
+  // Focus trap + Escape key — runs ONLY when isOpen changes, not on every render
   useEffect(() => {
     if (!isOpen) return
 
     const previousFocus = document.activeElement as HTMLElement | null
 
-    // Focus first focusable element that is NOT the close button
-    // The close button is always the first button in the header — skip it
+    // Focus first input/select/textarea, skip the close button
     const focusable = Array.from(
       dialogRef.current?.querySelectorAll<HTMLElement>(
         'input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]):not([aria-label="Close dialog"]), [href], [tabindex]:not([tabindex="-1"])'
       ) ?? []
     )
-    // Prefer first input/select/textarea, fallback to first focusable
     const firstInput = focusable.find((el) =>
       ['INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName)
     )
@@ -43,7 +44,7 @@ export function Dialog({
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
-        onClose()
+        onCloseRef.current()
         return
       }
       if (e.key !== 'Tab') return
@@ -77,7 +78,8 @@ export function Dialog({
       document.body.style.overflow = ''
       previousFocus?.focus()
     }
-  }, [isOpen, onClose])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]) // ← intentionally omit onClose; we use onCloseRef instead
 
   if (!isOpen) return null
 

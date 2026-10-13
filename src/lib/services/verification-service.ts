@@ -6,6 +6,7 @@ export interface PublicVerificationData {
   ref: string
   status: DocumentStatus
   organization: {
+    id: string        // needed only for logo URL — not displayed to user
     name: string
     logoPath: string | null
   }
@@ -44,6 +45,7 @@ export async function getPublicVerification(
       expiresAt: true,
       org: {
         select: {
+          id: true,
           name: true,
           logoPath: true,
         },
@@ -68,6 +70,7 @@ export async function getPublicVerification(
     ref: issuance.ref,
     status: issuance.status,
     organization: {
+      id: issuance.org.id,
       name: issuance.org.name,
       logoPath: issuance.org.logoPath,
     },
